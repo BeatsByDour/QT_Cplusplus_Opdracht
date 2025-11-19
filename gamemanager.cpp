@@ -1,3 +1,7 @@
 #include "gamemanager.h"
 
-GameManager::GameManager() {}
+GameManager::GameManager() {
+
+
+
+}
