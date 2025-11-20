@@ -2,9 +2,12 @@
 #ifndef CHARACTERCLASS_H
 #define CHARACTERCLASS_H
 #include <string>
+#include "iostream"
 
 class CharacterClass
 {
+
+    // encapsulation
 protected:
     // variables
     std::string sName;
@@ -17,6 +20,7 @@ public:
     // constructor
     CharacterClass(const std::string& sName, int iMaxHp,int iDamage );
 
+
     //getters
     std::string GetName() const;
     int GetMaxHP()const;
@@ -27,8 +31,15 @@ public:
     void SetMaxHP(int maxHP);
     void SetCurrentHP(int currentHP);
 
+    // character function
+    void RecieveHit(int dealtDamage, int currentHP);
+    void Hit(int damageDealt,int enemyHP);
+    void RecieveHealing(int HealthtoHeal,int currentHP);
     //print funciton
-    virtual void Print() const;
+    virtual void PrintName() const = 0; // Abstracte functie
+    void PrintStats();
+
+
 
 
 };

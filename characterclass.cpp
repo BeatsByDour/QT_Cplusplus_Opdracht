@@ -1,5 +1,5 @@
 #include "characterclass.h"
-#include <iostream>
+
 
 CharacterClass::CharacterClass(const std::string& name, int maxHP, int iDamage)
     : sName(name), iMaxHP(maxHP), iCurrentHP(maxHP), iDamage(iDamage) {}
@@ -28,6 +28,6 @@ void CharacterClass::SetCurrentHP(int currentHP) {
     iCurrentHP = currentHP;
 }
 
-void CharacterClass::Print() const {
+void CharacterClass::PrintName() const {
     std::cout << "Character Name: " << sName << std::endl;
 }
