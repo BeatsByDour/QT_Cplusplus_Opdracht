@@ -7,7 +7,7 @@ class PlayerClass : public CharacterClass
 public:
     PlayerClass(const std::string& name, int maxHP,int damage);
     // Override Print function
-    void Print() const override;
+    void PrintName() const override;
 };
 
 #endif // PLAYERCLASS_H

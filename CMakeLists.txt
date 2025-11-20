@@ -26,6 +26,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         gamemanager.h gamemanager.cpp
         characterclass.h characterclass.cpp
         playerclass.h playerclass.cpp
+        enemyclass.h enemyclass.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET CplusPlusTaak APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
