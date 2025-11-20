@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
-#include <QMainWindow>
+#include "gamemanager.h"
+#include "QMainWindow"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -17,7 +17,11 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void onStartGameClicked();   // Slot to handle button click.
+
 private:
     Ui::MainWindow *ui;
+    GameManager gameManager;
 };
 #endif // MAINWINDOW_H
