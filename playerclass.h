@@ -2,7 +2,7 @@
 #define PLAYERCLASS_H
 #include "characterclass.h"
 
-class PlayerClass : public CharacterClass
+class PlayerClass : public CharacterClass   // inheratance
 {
 public:
     PlayerClass(const std::string& name, int maxHP,int damage);
