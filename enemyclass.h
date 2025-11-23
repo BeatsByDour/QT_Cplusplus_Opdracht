@@ -3,7 +3,8 @@
 #include "characterclass.h"
 
 
-class EnemyClass : public CharacterClass
+class EnemyClass : public CharacterClass  // Punt 4: Useful and correct inheritance - PlayerClass hergebruikt alle basisfunctionaliteit van CharacterClass.
+
 {
 public:
     EnemyClass(const std::string& name, int maxHP,int damage);

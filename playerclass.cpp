@@ -3,7 +3,7 @@
 
 PlayerClass::PlayerClass(const std::string& name, int maxHP, int damage) : CharacterClass(name,maxHP,damage) {}
 
-void PlayerClass::PrintName() const {
-    std::cout << "Player: " << sName << std::endl;
+class PlayerClass : public CharacterClass // Punt 4: Useful and correct inheritance - PlayerClass hergebruikt alle basisfunctionaliteit van CharacterClass.
+
 }
 

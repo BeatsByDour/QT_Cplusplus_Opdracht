@@ -4,12 +4,14 @@
 #include <string>
 #include "iostream"
 
+    // Punt 2: Useful and correct abstraction - CharacterClass beschrijft wat elk karakter KAN (HP, damage, acties) zonder te weten of het een speler of vijand is.
+    // Punt 7: Useful and correct base class - CharacterClass is de gemeenschappelijke basis voor alle soorten karakters.
 class CharacterClass
 {
+    // Punt 1: Useful and correct class - deze klasse bundelt alle gemeenschappelijke data en functies voor elk karakter in het spel
 
-    // encapsulation
 protected:
-    // variables
+    // Punt 3: Useful and correct encapsulation - interne variabelen zijn afgeschermd en alleen via functies aan te passen/uit te lezen.
     std::string sName;
     int iMaxHP,iCurrentHP ;
     int iDamage;
@@ -36,7 +38,9 @@ public:
     void Hit(int damageDealt,int enemyHP);
     void RecieveHealing(int HealthtoHeal,int currentHP);
     //print funciton
-    virtual void PrintName() const = 0; // Abstracte functie
+    virtual void PrintName() const = 0;
+    // Punt 8: Useful and correct abstract base class - pure virtual functie maakt CharacterClass abstract zodat alleen specifieke subklassen instanties zijn.
+
     void PrintStats();
 
 

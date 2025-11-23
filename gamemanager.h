@@ -7,6 +7,9 @@
 
 class GameManager
 {
+
+private:
+    // Punt 6: Useful and correct object composition - GameManager bevat een verzameling CharacterClass objecten die samen de spelwereld vormen.
     std::vector<std::shared_ptr<CharacterClass>> characters;
 public:
     void AddCharacter(std::shared_ptr<CharacterClass> character);
