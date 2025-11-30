@@ -22,6 +22,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    GameManager gameManager;
+    GameManager gameManager; // Punt 6: Useful and correct object composition - MainWindow bevat een GameManager om de spel-logica te beheren.
 };
 #endif // MAINWINDOW_H

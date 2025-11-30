@@ -14,7 +14,9 @@ protected:
     // Punt 3: Useful and correct encapsulation - interne variabelen zijn afgeschermd en alleen via functies aan te passen/uit te lezen.
     std::string sName;
     int iMaxHP,iCurrentHP ;
-    int iDamage;
+    int iPDamage,iMDamage;
+    int iPArmor,iMarmor;
+    int iLevel,iExperience;
     // armor slots
     // spell slots
 public:

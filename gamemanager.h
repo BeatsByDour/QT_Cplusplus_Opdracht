@@ -1,7 +1,7 @@
 #ifndef GAMEMANAGER_H
 #define GAMEMANAGER_H
 #include "playerclass.h"
-#include "enemyclass.h"
+#include "Creatureclass.h"
 #include <vector>
 #include <memory>
 
@@ -15,7 +15,7 @@ public:
     void AddCharacter(std::shared_ptr<CharacterClass> character);
     GameManager();
     void GetplayerChar(PlayerClass PLayer);
-    void GetOppChars(EnemyClass Enemies);
+    void GetOppChars(CreatureClass Enemies);
     void createEnvironment();
     void SetupGame();
 };
