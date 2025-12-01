@@ -10,6 +10,16 @@ enum class MoveCategory
     Special,
     Status
 };
+enum class Status
+{
+    None,
+    Sleep,
+    Paralyze,
+    Burn,
+    Poison,
+    Freeze
+};
+
 enum class Type
 {
     Earth,
@@ -20,6 +30,7 @@ enum class Type
     Dark,
     Flying,
     Ice,
+    Normal,
     Count // Voor loops/array sizes
 };
 struct Move

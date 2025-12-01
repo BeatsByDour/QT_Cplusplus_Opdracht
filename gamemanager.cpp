@@ -2,9 +2,9 @@
 
 GameManager::GameManager() {
 
-    CharacterClass* pChar = new PlayerClass("Hero", 100, 20);
+   // CharacterClass* pChar = new PlayerClass("Hero", 100, 20, 10);
     // Punt 5: Useful and correct polymorphism - pChar is een CharacterClass* maar verwijst naar een PlayerClass object.
-    pChar->PrintName();
+   // pChar->PrintName();
     // Punt 5: De juiste PrintName() van PlayerClass wordt aangeroepen via de base pointer.
 }
 
