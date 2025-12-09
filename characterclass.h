@@ -38,6 +38,7 @@ public:
                    int iMaxHp,
                    int iDamage,
                    int speed);
+
     Status GetStatus() const { return m_status; }
     void SetStatus(Status s) { m_status = s; }
 

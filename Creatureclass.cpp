@@ -1,6 +1,7 @@
 #include "CreatureClass.h"
 #include <iostream>
 
+
 bool CreatureClass::HasType(Type t) const
 {
     return aTypes[0] == t || aTypes[1] == t;

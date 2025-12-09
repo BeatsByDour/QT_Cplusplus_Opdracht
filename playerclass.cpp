@@ -7,20 +7,20 @@ PlayerClass::PlayerClass(const std::string& name,
                          int damage,
                          int speed,
                          const std::array<Move, 2>& playerMoves,
-                         const std::array<CreatureClass, 4>& party,
-                         int scalingHP,
-                         int scalingdamage,
-                         int scalingspeed,
-                         int scalingarmor)
+                         float scalingHP,
+                         float scalingdamage,
+                         float scalingspeed,
+                         float scalingarmor)
     : CharacterClass(name, maxHP, damage,speed),
     m_playerMoves(playerMoves),
-    m_caughtBeasts(party),
-    playerHpScale(1.2f),
-    playerDamageScale(1.2f),
-    playerSpeedScale(1.2f),
-    playerArmorScale(1.5f)
+    playerHpScale(scalingHP),
+    playerDamageScale(scalingdamage),
+    playerSpeedScale(scalingspeed),
+    playerArmorScale(scalingarmor)
 {
+
 }
+
 
 void PlayerClass::PrintName() const
 {
@@ -167,4 +167,45 @@ void PlayerClass::RewardAfterBeastDefeat(CreatureClass& defeatedBeast,
 
     std::cout << "Je hebt " << defeatedBeast.GetName()
               << " verslagen en " << matName << " gekregen!\n";
+}
+/*
+CreatureClass& PlayerClass::GetActiveBeast()
+{
+    // Zoek eerste niet-lege beast
+    for (int i = 0; i < 4; ++i)
+    {
+        if (!m_caughtBeasts[i].IsEmpty())
+        {
+            m_activeBeastIndex = i;
+            return m_caughtBeasts[i];
+        }
+    }
+    return m_caughtBeasts[0]; // fallback naar eerste (leeg)
+}
+
+void PlayerClass::SwitchBeast(int index)
+{
+    if (index < 0 || index >= 4 || m_caughtBeasts[index].IsEmpty())
+    {
+        std::cout << "Ongeldige of lege beast index!\n";
+        return;
+    }
+    m_activeBeastIndex = index;
+    std::cout << "Actieve beast gewisseld naar: ";
+    m_caughtBeasts[index].PrintName();
+}
+*/
+bool PlayerClass::AddToParty(const CreatureClass& beast)
+{
+    for (int i = 0; i < 4; ++i)
+    {
+        if (m_caughtBeasts[i].IsEmpty())
+        {
+            m_caughtBeasts[i] = beast;
+            std::cout << beast.GetName() << " toegevoegd aan party (slot " << i << ")!\n";
+            return true;
+        }
+    }
+    std::cout << "Party vol!\n";
+    return false;
 }

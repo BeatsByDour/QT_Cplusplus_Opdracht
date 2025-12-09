@@ -20,71 +20,71 @@ void CreatureDatabase::InitializeCreatures()
         std::array<Type, 2> types = {Type::Earth, Type::Earth};
         std::array<Move, 4> moves = {
             getMove("Earthquake"),
-            getMove("Tackle"),
-            getMove("Growl"),
-            getMove("Vine Whip")
+            getMove("Earthquake"),
+            getMove("Earthquake"),
+            getMove("Earthquake")
         };
-        m_creatures.emplace_back("Terrakid", 50, 30, 1, 255, types, moves);
+        m_creatures.emplace_back("Terrakid", 50, 30, 1, 255,10, types, moves,1.0f,1.0f,1.0f);
     }
 
     // ID 2: Water creature
     {
         std::array<Type, 2> types = {Type::Water, Type::Water};
         std::array<Move, 4> moves = {
-            getMove("Water Pulse"),
-            getMove("Water Gun"),
-            getMove("Tackle"),
-            getMove("Growl")
+            getMove("Earthquake"),
+            getMove("Earthquake"),
+            getMove("Earthquake"),
+            getMove("Earthquake")
         };
-        m_creatures.emplace_back("AquaPup", 55, 25, 2, 200, types, moves);
+        m_creatures.emplace_back("AquaPup", 55, 25, 2, 200,10, types, moves,1.0f,1.0f,1.0f);
     }
 
     // ID 3: Fire creature
     {
         std::array<Type, 2> types = {Type::Fire, Type::Fire};
         std::array<Move, 4> moves = {
-            getMove("Ember"),
-            getMove("Fire Blast"),
-            getMove("Tackle"),
-            getMove("Growl")
+            getMove("Earthquake"),
+            getMove("Earthquake"),
+            getMove("Earthquake"),
+            getMove("Earthquake")
         };
-        m_creatures.emplace_back("FlameFox", 45, 40, 3, 190, types, moves);
+        m_creatures.emplace_back("FlameFox", 45, 40, 3, 190,10, types, moves,1.0f,1.0f,1.0f);
     }
 
     // ID 4: Fire/Flying
     {
         std::array<Type, 2> types = {Type::Fire, Type::Flying};
         std::array<Move, 4> moves = {
-            getMove("Fire Blast"),
-            getMove("Gust"),
-            getMove("Ember"),
-            getMove("Air Slash")
+            getMove("Earthquake"),
+            getMove("Earthquake"),
+            getMove("Earthquake"),
+            getMove("Earthquake")
         };
-        m_creatures.emplace_back("PyroWing", 78, 84, 4, 45, types, moves);
+        m_creatures.emplace_back("PyroWing", 78, 84, 4, 45,10, types, moves,1.0f,1.0f,1.0f);
     }
 
     // ID 5: Ice creature
     {
         std::array<Type, 2> types = {Type::Ice, Type::Water};
         std::array<Move, 4> moves = {
-            getMove("Ice Beam"),
-            getMove("Water Pulse"),
-            getMove("Blizzard"),
-            getMove("Aurora Beam")
+            getMove("Earthquake"),
+            getMove("Earthquake"),
+            getMove("Earthquake"),
+            getMove("Earthquake")
         };
-        m_creatures.emplace_back("FrostFish", 60, 35, 5, 120, types, moves);
+        m_creatures.emplace_back("FrostFish", 60, 35, 5, 120,10, types, moves,1.0f,1.0f,1.0f);
     }
 
     // ID 6: Dark creature
     {
         std::array<Type, 2> types = {Type::Dark, Type::Dark};
         std::array<Move, 4> moves = {
-            getMove("Shadow Claw"),
-            getMove("Bite"),
-            getMove("Crunch"),
-            getMove("Dark Pulse")
+            getMove("Earthquake"),
+            getMove("Earthquake"),
+            getMove("Earthquake"),
+            getMove("Earthquake")
         };
-        m_creatures.emplace_back("NightCat", 65, 55, 6, 90, types, moves);
+        m_creatures.emplace_back("NightCat", 65, 55, 6, 90,10, types, moves,1.0f,1.0f,1.0f);
     }
 }
 

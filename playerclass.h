@@ -39,7 +39,6 @@ public:
                 int damage,
                 int speed,
                 const std::array<Move, 2>& playerMoves,
-                const std::array<CreatureClass, 4>& party,
                 float hpScale = 1.2f,
                 float dmgScale = 1.2f,
                 float spdScale = 1.0f,
@@ -62,6 +61,16 @@ public:
     void AttackEnemy(CreatureClass& enemy, int moveIndex);
     bool TryRun() const;
     bool TryCatchBeast(CreatureClass& target);
+    // Battle reward
+    void RewardAfterBeastDefeat(CreatureClass& defeatedBeast, int xpForPlayer, int xpForBeast);
+    // PlayerClass.h
+
+    void SetMoves(const std::array<Move, 2>& moves) { m_playerMoves = moves; }
+    void SetParty(const std::array<CreatureClass, 4>& party) { m_caughtBeasts = party; }
+    bool AddToParty(const CreatureClass& beast);
+
+
+
 
 private:
     double CalculateCatchChance(const CreatureClass& target) const;
@@ -73,8 +82,9 @@ private:
     void AddMaterial(int beastId, const std::string& name, int amount);
     int GetMaterialCount(int beastId)const;
 
-    // Battle reward
-    void RewardAfterBeastDefeat(CreatureClass& defeatedBeast, int xpForPlayer, int xpForBeast);
+    //void SwitchBeast(int index);
+    //const CreatureClass & GetActiveBeast();
+
 
 
 };
