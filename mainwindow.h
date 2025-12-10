@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 #include "gamemanager.h"
 #include "QMainWindow"
+#include "choicescreen.h"
+#include "startscreen.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -18,10 +20,13 @@ public:
     ~MainWindow();
 
 private slots:
-    void onStartGameClicked();   // Slot to handle button click.
+    void showStartScreen();
+    void showChoiceScreen();   // Slot to handle button click.
 
 private:
     Ui::MainWindow *ui;
+    ChoiceScreen *choiceScreen;   // nieuw window
+    StartScreen *startScreen;
     GameManager gameManager; // Punt 6: Useful and correct object composition - MainWindow bevat een GameManager om de spel-logica te beheren.
 };
 #endif // MAINWINDOW_H

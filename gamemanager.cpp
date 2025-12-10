@@ -22,6 +22,7 @@ GameManager::GameManager()
 
 void GameManager::Run()
 {
+
     while (m_isRunning)
     {
       //  ShowMainMenu();

@@ -14,18 +14,20 @@
    <string>RogueLikeTowerFighter</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="StartGameButton">
+   <widget class="QStackedWidget" name="ScreenStack">
     <property name="geometry">
      <rect>
-      <x>320</x>
-      <y>260</y>
-      <width>111</width>
-      <height>31</height>
+      <x>-1</x>
+      <y>9</y>
+      <width>801</width>
+      <height>571</height>
      </rect>
     </property>
-    <property name="text">
-     <string>StartGame</string>
+    <property name="currentIndex">
+     <number>1</number>
     </property>
+    <widget class="StartScreen" name="startscreen"/>
+    <widget class="ChoiceScreen" name="choicescreen"/>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -40,6 +42,20 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>StartScreen</class>
+   <extends>QWidget</extends>
+   <header>startscreen.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ChoiceScreen</class>
+   <extends>QWidget</extends>
+   <header>choicescreen.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

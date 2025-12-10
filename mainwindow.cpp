@@ -7,14 +7,30 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    connect( ui->StartGameButton,&QPushButton::clicked, this, &MainWindow::onStartGameClicked);
+    // Widgets uit de QStackedWidget halen (ze zijn gepromote)
+    startScreen  = qobject_cast<StartScreen*>(ui->ScreenStack->widget(0));
+    choiceScreen = qobject_cast<ChoiceScreen*>(ui->ScreenStack->widget(1));
+
+    // Signalen van StartScreen verbinden
+    connect(startScreen,  &StartScreen::StartGame,
+            this,         &MainWindow::showChoiceScreen);
+
+    // Eventueel terugknop op ChoiceScreen
+    connect(choiceScreen, &ChoiceScreen::encounterStartRequested,
+            this,         &MainWindow::showStartScreen);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
-void MainWindow::onStartGameClicked()
+void MainWindow::showStartScreen()
 {
-    gameManager.SetupGame(); // Call your GameManager function here.
+    ui->ScreenStack->setCurrentWidget(startScreen);
 }
+
+void MainWindow::showChoiceScreen()
+{
+    ui->ScreenStack->setCurrentWidget(choiceScreen);
+}
+
