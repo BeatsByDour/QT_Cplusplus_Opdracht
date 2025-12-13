@@ -9,14 +9,17 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+
+
+
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
 set(PROJECT_SOURCES
     main.cpp
     mainwindow.cpp mainwindow.h mainwindow.ui
-    choicescreen.cpp choicescreen.h choicescreen.ui
-    startscreen.cpp startscreen.h startscreen.ui
+
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -31,6 +34,11 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         totalmovesclass.h totalmovesclass.cpp
         creaturedatabase.h creaturedatabase.cpp
         equipment.h equipment.cpp
+        choicescreen.cpp choicescreen.h choicescreen.ui
+        startscreen.cpp startscreen.h startscreen.ui
+        storescreen.h storescreen.cpp storescreen.ui
+        battlescreen.h battlescreen.cpp battlescreen.ui
+        partyscreen.h partyscreen.cpp partyscreen.ui
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET CplusPlusTaak APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

@@ -1,11 +1,7 @@
-#ifndef STARTSCREEN_H
-#define STARTSCREEN_H
+#pragma once
 
 #include <QWidget>
-
-namespace Ui {
-class StartScreen;
-}
+#include "ui_startscreen.h"
 
 class StartScreen : public QWidget
 {
@@ -16,15 +12,16 @@ public:
     ~StartScreen();
 
 signals:
-    void OpenChoiceScreen();
+    void OpenOptionScreen();
     void StartGame();
+    void quitGame();
 
 private slots:
-    void on_btnChoiceScreen_clicked();
+    void on_btnOptionScreen_clicked();
     void on_btnStartGame_clicked();
+     void on_btnQuitGame_clicked();
 
 private:
     Ui::StartScreen *ui;
 };
 
-#endif // STARTSCREEN_H

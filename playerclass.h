@@ -2,6 +2,7 @@
 #ifndef PLAYERCLASS_H
 #define PLAYERCLASS_H
 
+#include <QString>
 #include "CharacterClass.h"
 #include "Move.h"
 #include "CreatureClass.h"
@@ -68,7 +69,7 @@ public:
     void SetMoves(const std::array<Move, 2>& moves) { m_playerMoves = moves; }
     void SetParty(const std::array<CreatureClass, 4>& party) { m_caughtBeasts = party; }
     bool AddToParty(const CreatureClass& beast);
-
+    QString GetStatsString()const;
 
 
 

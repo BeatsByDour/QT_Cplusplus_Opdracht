@@ -8,21 +8,27 @@ StartScreen::StartScreen(QWidget *parent)
     ui->setupUi(this);
 
 
-    connect(ui->btnOpenChoiceScreen,          &QPushButton::clicked,
-            this, &StartScreen::on_btnChoiceScreen_clicked);
+    connect(ui->btnOpenOptionScreen,          &QPushButton::clicked,
+            this, &StartScreen::on_btnOptionScreen_clicked);
     connect(ui->btnStartGame, &QPushButton::clicked,
             this, &StartScreen::on_btnStartGame_clicked);
+    connect(ui->btnQuitGame, &QPushButton::clicked,
+            this, &StartScreen::on_btnQuitGame_clicked);
 }
 
 StartScreen::~StartScreen()
 {
     delete ui;
 }
-void StartScreen::on_btnChoiceScreen_clicked()
+void StartScreen::on_btnOptionScreen_clicked()
 {
-    emit OpenChoiceScreen();
+    emit OpenOptionScreen();
 }
 void StartScreen::on_btnStartGame_clicked()
 {
     emit StartGame();
+}
+void StartScreen::on_btnQuitGame_clicked()
+{
+    emit quitGame();
 }

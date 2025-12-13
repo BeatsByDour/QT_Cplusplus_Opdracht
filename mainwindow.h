@@ -1,15 +1,19 @@
+#pragma once
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 #include "gamemanager.h"
 #include "QMainWindow"
-#include "choicescreen.h"
 #include "startscreen.h"
+#include "choicescreen.h"
+#include "partyscreen.h"
+#include "battlescreen.h"
+#include "storescreen.h"
 
-QT_BEGIN_NAMESPACE
+
 namespace Ui {
 class MainWindow;
 }
-QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
 {
@@ -21,12 +25,18 @@ public:
 
 private slots:
     void showStartScreen();
-    void showChoiceScreen();   // Slot to handle button click.
+    void showChoiceScreen();
+    void showBattleScreen();
+    void showPartyScreen();
+    void showStoreScreen();
 
 private:
     Ui::MainWindow *ui;
-    ChoiceScreen *choiceScreen;   // nieuw window
+    ChoiceScreen *choiceScreen;
     StartScreen *startScreen;
+    BattleScreen *battleScreen;
+    PartyScreen  *partyScreen;
+    StoreScreen  *storeScreen;
     GameManager gameManager; // Punt 6: Useful and correct object composition - MainWindow bevat een GameManager om de spel-logica te beheren.
 };
 #endif // MAINWINDOW_H

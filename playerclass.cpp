@@ -209,3 +209,12 @@ bool PlayerClass::AddToParty(const CreatureClass& beast)
     std::cout << "Party vol!\n";
     return false;
 }
+QString PlayerClass::GetStatsString() const
+{
+    return QString("HP: %1 | DMG: %2 | SPD: %3 | ARM: %4")
+    .arg(iMaxHP)
+        .arg(iMDamage)
+        .arg(iSpeed)
+        .arg(iPArmor);
+}
+

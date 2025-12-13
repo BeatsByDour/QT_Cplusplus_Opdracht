@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>StartScreen</class>
- <widget class="QWidget" name="StartScreen">
+ <class>StoreScreen</class>
+ <widget class="QWidget" name="StoreScreen">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -482,83 +482,17 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QPushButton" name="btnStartGame">
+  <widget class="QPushButton" name="btnReturn">
    <property name="geometry">
     <rect>
-     <x>300</x>
-     <y>220</y>
-     <width>161</width>
-     <height>61</height>
+     <x>610</x>
+     <y>510</y>
+     <width>131</width>
+     <height>31</height>
     </rect>
    </property>
-   <property name="font">
-    <font>
-     <pointsize>18</pointsize>
-     <bold>true</bold>
-    </font>
-   </property>
    <property name="text">
-    <string>Start Game</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btnOpenOptionScreen">
-   <property name="geometry">
-    <rect>
-     <x>300</x>
-     <y>310</y>
-     <width>161</width>
-     <height>61</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>18</pointsize>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>options</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btnQuitGame">
-   <property name="geometry">
-    <rect>
-     <x>300</x>
-     <y>400</y>
-     <width>161</width>
-     <height>61</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>18</pointsize>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>Quit Game</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="lblTitel">
-   <property name="geometry">
-    <rect>
-     <x>190</x>
-     <y>70</y>
-     <width>371</width>
-     <height>91</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>40</pointsize>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>Game Name</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignmentFlag::AlignCenter</set>
+    <string>Return </string>
    </property>
   </widget>
  </widget>

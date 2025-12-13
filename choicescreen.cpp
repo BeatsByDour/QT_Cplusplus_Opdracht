@@ -7,13 +7,15 @@ ChoiceScreen::ChoiceScreen(QWidget *parent)
 {
     ui->setupUi(this);
 
-    // knoppen verbinden met interne slots (als je geen auto-connect gebruikt)
+
     connect(ui->btnParty,          &QPushButton::clicked,
             this, &ChoiceScreen::on_btnParty_clicked);
     connect(ui->btnEncounter, &QPushButton::clicked,
             this, &ChoiceScreen::on_btnStartEncounter_clicked);
+    connect(ui->btnStore,  &QPushButton::clicked,
+            this, &ChoiceScreen::on_btnStore_clicked);
     connect(ui->btnQuit,  &QPushButton::clicked,
-            this, &ChoiceScreen::on_btnStopEncounter_clicked);
+            this, &ChoiceScreen::on_btnQuit_clicked);
 }
 
 ChoiceScreen::~ChoiceScreen()
@@ -31,7 +33,20 @@ void ChoiceScreen::on_btnStartEncounter_clicked()
     emit encounterStartRequested();
 }
 
-void ChoiceScreen::on_btnStopEncounter_clicked()
+void ChoiceScreen::on_btnStore_clicked()
 {
-    emit encounterStopRequested();
+    emit storeRequested();
+}
+void ChoiceScreen::on_btnQuit_clicked()
+{
+    emit quitRequested();
+}
+void ChoiceScreen::setStage(int stage)
+{
+    ui->lbl_StageValue->setText(QString("Stage: %1").arg(stage));
+}
+
+void ChoiceScreen::setPlayerStats(const QString &text)
+{
+    ui->lbl_PlayerStats->setText(text);
 }
