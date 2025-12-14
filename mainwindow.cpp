@@ -66,6 +66,25 @@ void MainWindow::showStartScreen()
 
 void MainWindow::showChoiceScreen()
 {
+    // Player ophalen uit GameManager
+    PlayerClass &player = gameManager.GetPlayer();
+
+    // CharacterClass-getters gebruiken
+    int hp   = player.GetMaxHP();
+    int dmg  = player.GetPDamage();      // voeg zo'n getter toe als je die nog niet hebt
+    int arm  = player.GetPArmor();       // idem
+    int spd  = player.GetSpeed();
+    int lvl  = player.GetLevel();
+    int exp  = player.GetExperience();
+
+    // Labels in de ChoiceScreen bijwerken
+    ui->ChoiceScreen->findChild<QLabel*>("lbl_Hp_Value")->setText(QString::number(hp));
+    ui->ChoiceScreen->findChild<QLabel*>("lbl_Dmg_Value")->setText(QString::number(dmg));
+    ui->ChoiceScreen->findChild<QLabel*>("lbl_Armor_Value")->setText(QString::number(arm));
+    ui->ChoiceScreen->findChild<QLabel*>("lblSpeed_Value")->setText(QString::number(spd));
+    ui->ChoiceScreen->findChild<QLabel*>("lbl_Level_Value")->setText(QString::number(lvl));
+    ui->ChoiceScreen->findChild<QLabel*>("lbl_Exp_Value")->setText(QString::number(exp));
+
     ui->ScreenStack->setCurrentWidget(choiceScreen);
 }
 

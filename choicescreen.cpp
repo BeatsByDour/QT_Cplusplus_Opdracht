@@ -46,7 +46,3 @@ void ChoiceScreen::setStage(int stage)
     ui->lbl_StageValue->setText(QString("Stage: %1").arg(stage));
 }
 
-void ChoiceScreen::setPlayerStats(const QString &text)
-{
-    ui->lbl_PlayerStats->setText(text);
-}
