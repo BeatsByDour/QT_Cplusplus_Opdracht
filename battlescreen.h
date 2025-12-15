@@ -1,6 +1,7 @@
 #pragma once
 #ifndef BATTLESCREEN_H
 #define BATTLESCREEN_H
+#include "gamemanager.h"
 
 #include <QWidget>
 
@@ -16,14 +17,22 @@ public:
     explicit BattleScreen(QWidget *parent = nullptr);
     ~BattleScreen();
 
+    void setupBattle(const PlayerClass &player,
+                     const CreatureClass *activeBeast, // nullptr als geen beast
+                     const CreatureClass &enemy);
+    int selectedPlayerMoveIndex() const;
+    QString  selectedPlayerMoveName() const;
+    void updateEnemyHP(int current, int max, const QString &actionText);
+    void appendActionText(const QString &line);
+    void updatePlayerHP(int current, int max);
+    void updateEnemyHP(int current, int max);
+    void setRound(int r);
+    void setActionText(const QString &txt);
+
     signals:
     void Escape();
     void Attack();
     void Catch();
-
-
-
-
 
     private slots:
     void on_btnEscape_clicked();
@@ -32,6 +41,7 @@ public:
 
 private:
     Ui::BattleScreen *ui;
+    int m_round{1};
 };
 
 #endif // BATTLESCREEN_H

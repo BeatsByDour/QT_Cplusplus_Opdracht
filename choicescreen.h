@@ -25,7 +25,7 @@ signals:
 
 private slots:
     void on_btnParty_clicked();
-     void on_btnStore_clicked();
+    void on_btnStore_clicked();
     void on_btnStartEncounter_clicked();
     void on_btnQuit_clicked();
 

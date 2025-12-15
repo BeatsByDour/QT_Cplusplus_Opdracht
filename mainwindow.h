@@ -29,6 +29,8 @@ private slots:
     void showBattleScreen();
     void showPartyScreen();
     void showStoreScreen();
+    void onBattleAttack();
+    void onBattleCatch();
 
 private:
     Ui::MainWindow *ui;
@@ -38,5 +40,7 @@ private:
     PartyScreen  *partyScreen;
     StoreScreen  *storeScreen;
     GameManager gameManager; // Punt 6: Useful and correct object composition - MainWindow bevat een GameManager om de spel-logica te beheren.
+    CreatureClass m_currentEnemy;
+    int m_round{1};
 };
 #endif // MAINWINDOW_H

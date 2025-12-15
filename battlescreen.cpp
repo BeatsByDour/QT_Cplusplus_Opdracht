@@ -29,3 +29,135 @@ void BattleScreen::on_btnEscape_clicked()
 {
     emit Escape();
 }
+
+void BattleScreen::setupBattle(const PlayerClass &player,
+                               const CreatureClass *activeBeast,
+                               const CreatureClass &enemy)
+{
+    // Player naam + lvl
+    QString playerNameLvl = QString("%1  Lv.%2")
+                                .arg(QString::fromStdString(player.GetName()))
+                                .arg(player.GetLevel());
+    ui->lbl_P_Name->setText(playerNameLvl);
+
+    // Player HP bar + tekst
+    ui->pbr_Player->setMaximum(player.GetMaxHP());
+    ui->pbr_Player->setValue(player.GetCurrentHP());
+    ui->lbl_P_Hp_Value->setText(
+        QString("%1/%2").arg(player.GetCurrentHP()).arg(player.GetMaxHP()));
+
+    // Beast (actieve party-creature)
+    if (activeBeast && !activeBeast->IsEmpty())
+    {
+
+        ui->BeastsMoves->setVisible(true);
+        ui->pbr_Beasts->setVisible(true);
+        ui->lbl_B_Name->setVisible(true);
+        ui->lbl_B_hp_Value->setVisible(true);
+          ui->lbl_Beasts_Moves_Text->setVisible(true);
+        QString beastNameLvl = QString("%1  Lv.%2")
+                                   .arg(QString::fromStdString(activeBeast->GetName()))
+                                   .arg(activeBeast->GetLevel());
+        ui->lbl_B_Name->setText(beastNameLvl);
+
+        ui->pbr_Beasts->setMaximum(activeBeast->GetMaxHP());
+        ui->pbr_Beasts->setValue(activeBeast->GetCurrentHP());
+        ui->lbl_B_hp_Value->setText(
+            QString("%1/%2").arg(activeBeast->GetCurrentHP())
+                .arg(activeBeast->GetMaxHP()));
+    }
+    else
+    {
+        // geen beast in party → UI verbergen
+        ui->BeastsMoves->setVisible(false);
+        ui->pbr_Beasts->setVisible(false);
+        ui->lbl_B_Name->setVisible(false);
+        ui->lbl_B_hp_Value->setVisible(false);
+        ui->lbl_Beasts_Moves_Text->setVisible(false);
+    }
+
+    // Enemy naam + lvl
+    QString enemyNameLvl = QString("%1  Lv.%2")
+                               .arg(QString::fromStdString(enemy.GetName()))
+                               .arg(enemy.GetLevel());
+    ui->lbl_E_Name->setText(enemyNameLvl);
+
+    ui->pbr_Enemy->setMaximum(enemy.GetMaxHP());
+    ui->pbr_Enemy->setValue(enemy.GetCurrentHP());
+
+    // Ronde en actions
+    m_round = 1;
+    ui->lbl_Round->setText(QString("Round: %1").arg(m_round));
+    ui->lbl_actions->setText("Actions: 0");
+
+    // ComboBoxen vullen met moves
+    ui->PlayerMoves->clear();
+    ui->BeastsMoves->clear();
+
+    // speler-moves (2 stuks in m_playerMoves)
+    for (int i = 0; i < 2; ++i) {
+        const Move &m = player.GetPlayerMove(i);
+        if (!m.name.empty())
+            ui->PlayerMoves->addItem(QString::fromStdString(m.name), i);
+    }
+
+    // beast-moves (4 moves in creature)
+    if (activeBeast && !activeBeast->IsEmpty()) {
+        for (int i = 0; i < 4; ++i) {
+            const Move &m = activeBeast->GetMove(i);
+            if (!m.name.empty())
+                ui->BeastsMoves->addItem(QString::fromStdString(m.name), i);
+        }
+        ui->BeastsMoves->setVisible(true);
+    } else {
+        ui->BeastsMoves->setVisible(false);
+    }
+}
+int BattleScreen::selectedPlayerMoveIndex() const
+{
+    return ui->PlayerMoves->currentData().toInt();
+}
+
+QString BattleScreen::selectedPlayerMoveName() const
+{
+    return ui->PlayerMoves->currentText();
+}
+
+void BattleScreen::updateEnemyHP(int current, int max, const QString &actionText)
+{
+    ui->pbr_Enemy->setMaximum(max);
+    ui->pbr_Enemy->setValue(current);
+    ui->lbl_actions->setText(actionText);
+    // Round++ mag je hier of in MainWindow doen
+}
+void BattleScreen::appendActionText(const QString &line)
+{
+    ui->lbl_actions->setText(line);
+}
+
+void BattleScreen::updatePlayerHP(int current, int max)
+{
+    ui->pbr_Player->setMaximum(max);
+    ui->pbr_Player->setValue(current);
+    ui->lbl_P_Hp_Value->setText(
+        QString("%1/%2").arg(current).arg(max));
+}
+
+void BattleScreen::updateEnemyHP(int current, int max)
+{
+    ui->pbr_Enemy->setMaximum(max);
+    ui->pbr_Enemy->setValue(current);
+}
+
+void BattleScreen::setRound(int r)
+{
+    ui->lbl_Round->setText(QString("Round: %1").arg(r));
+}
+
+void BattleScreen::setActionText(const QString &txt)
+{
+    ui->lbl_actions->setText(txt);
+}
+
+
+

@@ -11,14 +11,17 @@ PlayerClass::PlayerClass(const std::string& name,
                          float scalingdamage,
                          float scalingspeed,
                          float scalingarmor)
-    : CharacterClass(name, maxHP, damage,speed),
+    : CharacterClass(name, maxHP, damage, speed),
     m_playerMoves(playerMoves),
     playerHpScale(scalingHP),
     playerDamageScale(scalingdamage),
     playerSpeedScale(scalingspeed),
     playerArmorScale(scalingarmor)
 {
-
+    hpScalePerLevel      = playerHpScale;       // bv. 1.5 → ~15 HP/level
+    pDamageScalePerLevel = playerDamageScale;   // 1.2 → ~2–3 dmg/level
+    pArmorScalePerLevel  = playerArmorScale;
+    speedScalePerLevel   = playerSpeedScale;
 }
 
 
@@ -168,33 +171,6 @@ void PlayerClass::RewardAfterBeastDefeat(CreatureClass& defeatedBeast,
     std::cout << "Je hebt " << defeatedBeast.GetName()
               << " verslagen en " << matName << " gekregen!\n";
 }
-/*
-CreatureClass& PlayerClass::GetActiveBeast()
-{
-    // Zoek eerste niet-lege beast
-    for (int i = 0; i < 4; ++i)
-    {
-        if (!m_caughtBeasts[i].IsEmpty())
-        {
-            m_activeBeastIndex = i;
-            return m_caughtBeasts[i];
-        }
-    }
-    return m_caughtBeasts[0]; // fallback naar eerste (leeg)
-}
-
-void PlayerClass::SwitchBeast(int index)
-{
-    if (index < 0 || index >= 4 || m_caughtBeasts[index].IsEmpty())
-    {
-        std::cout << "Ongeldige of lege beast index!\n";
-        return;
-    }
-    m_activeBeastIndex = index;
-    std::cout << "Actieve beast gewisseld naar: ";
-    m_caughtBeasts[index].PrintName();
-}
-*/
 bool PlayerClass::AddToParty(const CreatureClass& beast)
 {
     for (int i = 0; i < 4; ++i)

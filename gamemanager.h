@@ -12,6 +12,8 @@ private:
     TotalMovesClass   m_movesDB;
     CreatureDatabase  m_creatureDB;
     PlayerClass       m_player;
+    int m_stage{1};
+
 
 public:
     GameManager();
@@ -20,8 +22,14 @@ public:
     PlayerClass&       GetPlayer()       { return m_player; }
     const PlayerClass& GetPlayer() const { return m_player; }
 
-    // eventueel helper om een willekeurige vijand te genereren,
-    // als je dit later vanuit BattleScreen wilt gebruiken
+    int  GetStage() const { return m_stage; }   // getter
+    void NextStage()      { ++m_stage; }        // stage++
+    bool ResolveTurn(CreatureClass &enemy, int playerMoveIndex, bool useBeastMove);
+    int  CalculateDamage(const Move &move,
+                        const CharacterClass &attacker,
+                        CharacterClass &defender);
+
+
     CreatureClass GenerateRandomEnemy();
 
 private:

@@ -16,7 +16,7 @@ protected:
     std::string sName;
     int iMaxHP, iCurrentHP;
     int iPDamage, iMDamage;
-    int iPArmor, iMarmor;
+    int iPArmor, iMArmor;
     int iLevel, iExperience;
 
     int iSpeed;              // bepaalt beurtvolgorde
@@ -26,11 +26,15 @@ protected:
     int pDamagePerLevel;
     int mDamagePerLevel;
     int PArmorPerLevel;
-    int iMarmorPerLevel;
+    int iMArmorPerLevel;
     int speedPerLevel;
     Status m_status{Status::None};
-    // armor slots
-    // spell slots
+    float hpScalePerLevel{1.0f};
+    float pDamageScalePerLevel{1.0f};
+    float mDamageScalePerLevel{1.0f};
+    float pArmorScalePerLevel{1.0f};
+    float mArmorScalePerLevel{1.0f};
+    float speedScalePerLevel{1.0f};
 public:
 
     // constructor
@@ -50,7 +54,10 @@ public:
     int GetLevel() const { return iLevel; }
     int GetExperience() const { return iExperience; }
     int GetPDamage() const { return iPDamage; }
+    int GetMDamage() const {return iMDamage;}
     int GetPArmor()  const { return iPArmor;  }
+    int GetMArmor()  const { return iMArmor;  }
+
 
     // level / XP
     void AddExperience(int amount);

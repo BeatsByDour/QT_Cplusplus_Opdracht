@@ -11,7 +11,7 @@ CharacterClass::CharacterClass(const std::string& name,
     iPDamage(damage),
     iMDamage(0),
     iPArmor(0),
-    iMarmor(0),
+    iMArmor(0),
     iLevel(1),
     iExperience(0),
     iSpeed(speed),
@@ -19,7 +19,7 @@ CharacterClass::CharacterClass(const std::string& name,
     pDamagePerLevel(2),
     mDamagePerLevel(1),
     PArmorPerLevel(2),
-    iMarmorPerLevel(1),
+    iMArmorPerLevel(1),
     speedPerLevel(1)
 {
 }
@@ -33,18 +33,30 @@ void CharacterClass::AddExperience(int amount)
         iExperience -= iLevel * 100;
         LevelUp();
     }
+
+    // optioneel: bereken hoeveel XP nog nodig is voor het volgende level
+    int neededForNext = iLevel * 100 - iExperience;
+    if (neededForNext < 0)
+        neededForNext = 0;
+
+    // hier kun je eventueel debug-print doen
+    // std::cout << "XP: " << iExperience
+    //           << " | nodig voor level " << (iLevel + 1)
+    //           << ": " << neededForNext << std::endl;
 }
 
 void CharacterClass::LevelUp()
 {
     ++iLevel;
-    iMaxHP     += hpPerLevel;
-    iPDamage   += pDamagePerLevel;
-    iMDamage   += mDamagePerLevel;
-    iPArmor    += PArmorPerLevel;
-    iMarmor     += iMarmorPerLevel;
-    iSpeed     += speedPerLevel;
-    iCurrentHP  = iMaxHP; // eventueel full heal
+
+    iMaxHP   += static_cast<int>(hpPerLevel   * hpScalePerLevel);
+    iPDamage += static_cast<int>(pDamagePerLevel * pDamageScalePerLevel);
+    iMDamage += static_cast<int>(mDamagePerLevel * mDamageScalePerLevel);
+    iPArmor  += static_cast<int>(PArmorPerLevel * pArmorScalePerLevel);
+    iMArmor  += static_cast<int>(iMArmorPerLevel * mArmorScalePerLevel);
+    iSpeed   += static_cast<int>(speedPerLevel * speedScalePerLevel);
+
+    iCurrentHP = iMaxHP;
 }
 
 

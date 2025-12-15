@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QTimer>
 
 
 
@@ -50,6 +51,12 @@ MainWindow::MainWindow(QWidget *parent)
     // BattleScreen: als encounter stopt, terug naar Choice (optioneel)
     connect(battleScreen, &BattleScreen::Escape,    // of een eigen "battleFinished"
             this,         &MainWindow::showChoiceScreen);
+    connect(battleScreen, &BattleScreen::Attack,
+            this, &MainWindow::onBattleAttack);
+    connect(battleScreen, &BattleScreen::Catch,
+            this, &MainWindow::onBattleCatch);
+
+
 
     // Begin op StartScreen
     showStartScreen();
@@ -66,32 +73,43 @@ void MainWindow::showStartScreen()
 
 void MainWindow::showChoiceScreen()
 {
-    // Player ophalen uit GameManager
     PlayerClass &player = gameManager.GetPlayer();
 
-    // CharacterClass-getters gebruiken
-    int hp   = player.GetMaxHP();
-    int dmg  = player.GetPDamage();      // voeg zo'n getter toe als je die nog niet hebt
-    int arm  = player.GetPArmor();       // idem
-    int spd  = player.GetSpeed();
-    int lvl  = player.GetLevel();
-    int exp  = player.GetExperience();
+    int curHp = player.GetCurrentHP();
+    int maxHp = player.GetMaxHP();
+    int pDmg  = player.GetPDamage();
+    int mDmg  = player.GetMDamage();
+    int pArm  = player.GetPArmor();
+    int mArm  = player.GetMArmor();
+    int spd   = player.GetSpeed();
+    int lvl   = player.GetLevel();
+    int exp   = player.GetExperience();
+    int neededForNext = lvl * 100 - exp;
+    if (neededForNext < 0) neededForNext = 0;
 
-    // Labels in de ChoiceScreen bijwerken
-    ui->ChoiceScreen->findChild<QLabel*>("lbl_Hp_Value")->setText(QString::number(hp));
-    ui->ChoiceScreen->findChild<QLabel*>("lbl_Dmg_Value")->setText(QString::number(dmg));
-    ui->ChoiceScreen->findChild<QLabel*>("lbl_Armor_Value")->setText(QString::number(arm));
-    ui->ChoiceScreen->findChild<QLabel*>("lblSpeed_Value")->setText(QString::number(spd));
-    ui->ChoiceScreen->findChild<QLabel*>("lbl_Level_Value")->setText(QString::number(lvl));
-    ui->ChoiceScreen->findChild<QLabel*>("lbl_Exp_Value")->setText(QString::number(exp));
+    int stage = gameManager.GetStage();
+
+    auto lblHp    = ui->ChoiceScreen->findChild<QLabel*>("lbl_Hp_Value");
+    auto lblDmg   = ui->ChoiceScreen->findChild<QLabel*>("lbl_Dmg_Value");
+    auto lblArm   = ui->ChoiceScreen->findChild<QLabel*>("lbl_Armor_Value");
+    auto lblSpd   = ui->ChoiceScreen->findChild<QLabel*>("lblSpeed_Value");
+    auto lblLvl   = ui->ChoiceScreen->findChild<QLabel*>("lbl_Level_Value");
+    auto lblExp   = ui->ChoiceScreen->findChild<QLabel*>("lbl_Exp_Value");
+    auto lblStage = ui->ChoiceScreen->findChild<QLabel*>("lbl_Stage_Value");
+
+    if (lblHp)    lblHp->setText(QString("%1/%2").arg(curHp).arg(maxHp));
+    if (lblDmg)   lblDmg->setText(QString("P:%1  M:%2").arg(pDmg).arg(mDmg));
+    if (lblArm)   lblArm->setText(QString("P:%1  M:%2").arg(pArm).arg(mArm));
+    if (lblSpd)   lblSpd->setText(QString::number(spd));
+    if (lblLvl)   lblLvl->setText(QString::number(lvl));
+    if (lblExp)   lblExp->setText(
+            QString("%1  (next: %2)").arg(exp).arg(neededForNext));
+    if (lblStage) lblStage->setText(QString::number(stage));
 
     ui->ScreenStack->setCurrentWidget(choiceScreen);
 }
 
-void MainWindow::showBattleScreen()
-{
-    ui->ScreenStack->setCurrentWidget(battleScreen);
-}
+
 
 void MainWindow::showPartyScreen()
 {
@@ -103,4 +121,73 @@ void MainWindow::showStoreScreen()
     ui->ScreenStack->setCurrentWidget(storeScreen);
 }
 
+void MainWindow::showBattleScreen()
+{
+    PlayerClass &player = gameManager.GetPlayer();
+
+    CreatureClass enemy = gameManager.GenerateRandomEnemy();
+    m_currentEnemy = enemy; // kopie bewaren voor het gevecht
+
+    CreatureClass *activeBeast = nullptr;
+    auto &party = player.GetParty();
+    for (int i = 0; i < static_cast<int>(party.size()); ++i) {
+        if (!party[i].IsEmpty()) {
+            activeBeast = &const_cast<CreatureClass&>(party[i]);
+            break;
+        }
+    }
+
+    battleScreen->setupBattle(player, activeBeast, m_currentEnemy);
+    ui->ScreenStack->setCurrentWidget(battleScreen);
+}
+
+void MainWindow::onBattleAttack()
+{
+    PlayerClass &player = gameManager.GetPlayer();
+
+    int moveIdx = battleScreen->selectedPlayerMoveIndex();
+    bool finished = gameManager.ResolveTurn(m_currentEnemy, moveIdx, false);
+
+    battleScreen->updatePlayerHP(player.GetCurrentHP(), player.GetMaxHP());
+    battleScreen->updateEnemyHP(m_currentEnemy.GetCurrentHP(),
+                                m_currentEnemy.GetMaxHP());
+    battleScreen->setRound(++m_round);
+
+    if (finished) {
+        if (m_currentEnemy.GetCurrentHP() <= 0) {
+            player.RewardAfterBeastDefeat(m_currentEnemy,
+                                          m_currentEnemy.GetCatchRate() * m_currentEnemy.GetLevel(),
+                                          m_currentEnemy.GetCatchRate() * m_currentEnemy.GetLevel());
+            battleScreen->setActionText("Enemy defeated! Reward received.");
+        } else {
+            battleScreen->setActionText("You were defeated...");
+        }
+
+        QTimer::singleShot(1500, this, [this]() {
+            gameManager.NextStage();
+            showChoiceScreen();
+        });
+    }
+    QTimer::singleShot(2500, this, [this](){});
+    // geen else nodig: speler kan gewoon opnieuw klikken
+}
+
+void MainWindow::onBattleCatch()
+{
+    PlayerClass &player = gameManager.GetPlayer();
+
+    bool caught = player.TryCatchBeast(m_currentEnemy);
+    if (caught) {
+        player.AddToParty(m_currentEnemy);
+        battleScreen->setActionText("Beast caught! Reward: new beast.");
+
+        // 1 seconde wachten
+        QTimer::singleShot(1000, this, [this]() {
+            gameManager.NextStage();
+            showChoiceScreen();
+        });
+    } else {
+        battleScreen->appendActionText("Catch failed!");
+    }
+}
 
