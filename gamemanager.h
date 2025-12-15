@@ -12,27 +12,21 @@ private:
     TotalMovesClass   m_movesDB;
     CreatureDatabase  m_creatureDB;
     PlayerClass       m_player;
-    bool              m_isRunning;
 
 public:
     GameManager();
 
-    // hoofd-game-loop
-    void Run();
+    // toegang tot player voor UI / MainWindow
+    PlayerClass&       GetPlayer()       { return m_player; }
+    const PlayerClass& GetPlayer() const { return m_player; }
+
+    // eventueel helper om een willekeurige vijand te genereren,
+    // als je dit later vanuit BattleScreen wilt gebruiken
+    CreatureClass GenerateRandomEnemy();
 
 private:
     // init helpers
     void InitializePlayer();
-    void ShowMainMenu();
-    void StartWildEncounter();
-    void initializePlayer();
-    CreatureClass GenerateRandomEnemy();
-
-
-    // battle helpers
-    void BattleLoop(CreatureClass enemy);
-    void PlayerTurn(CreatureClass& enemy);
-    void EnemyTurn(CreatureClass& enemy);
 };
 
 #endif // GAMEMANAGER_H

@@ -71,11 +71,13 @@ void CharacterClass::SetMaxHP(int maxHP) {
 void CharacterClass::SetCurrentHP(int currentHP) {
     iCurrentHP = currentHP;
 }
-void CharacterClass::RecieveHit(int dealtDamage, int currentHP)
+void CharacterClass::RecieveHit(int dealtDamage, int /*currentHP*/)
 {
-    // incorrect
-    currentHP =-dealtDamage;
+    iCurrentHP -= dealtDamage;
+    if (iCurrentHP < 0)
+        iCurrentHP = 0;
 }
+
 
 void CharacterClass::PrintName() const {
     std::cout << "Character Name: " << sName << std::endl;

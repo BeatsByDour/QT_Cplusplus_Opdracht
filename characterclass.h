@@ -49,6 +49,8 @@ public:
     int GetSpeed() const { return iSpeed; }
     int GetLevel() const { return iLevel; }
     int GetExperience() const { return iExperience; }
+    int GetPDamage() const { return iPDamage; }
+    int GetPArmor()  const { return iPArmor;  }
 
     // level / XP
     void AddExperience(int amount);
