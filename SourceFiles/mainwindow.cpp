@@ -95,7 +95,7 @@ void MainWindow::showChoiceScreen()
     auto lblSpd   = ui->ChoiceScreen->findChild<QLabel*>("lblSpeed_Value");
     auto lblLvl   = ui->ChoiceScreen->findChild<QLabel*>("lbl_Level_Value");
     auto lblExp   = ui->ChoiceScreen->findChild<QLabel*>("lbl_Exp_Value");
-    auto lblStage = ui->ChoiceScreen->findChild<QLabel*>("lbl_Stage_Value");
+    auto lblStage = ui->ChoiceScreen->findChild<QLabel*>("lbl_StageValue");
 
     if (lblHp)    lblHp->setText(QString("%1/%2").arg(curHp).arg(maxHp));
     if (lblDmg)   lblDmg->setText(QString("P:%1  M:%2").arg(pDmg).arg(mDmg));
@@ -104,7 +104,7 @@ void MainWindow::showChoiceScreen()
     if (lblLvl)   lblLvl->setText(QString::number(lvl));
     if (lblExp)   lblExp->setText(
             QString("%1  (next: %2)").arg(exp).arg(neededForNext));
-    if (lblStage) lblStage->setText(QString::number(stage));
+    if (lblStage) choiceScreen->setStage(stage);
 
     ui->ScreenStack->setCurrentWidget(choiceScreen);
 }
@@ -137,40 +137,88 @@ void MainWindow::showBattleScreen()
         }
     }
 
+
     battleScreen->setupBattle(player, activeBeast, m_currentEnemy);
     ui->ScreenStack->setCurrentWidget(battleScreen);
 }
 
 void MainWindow::onBattleAttack()
 {
+    static int id = 0;
+    int thisId = ++id;
+    qDebug() << "onBattleAttack begin, id =" << thisId;
     PlayerClass &player = gameManager.GetPlayer();
 
-    int moveIdx = battleScreen->selectedPlayerMoveIndex();
-    bool finished = gameManager.ResolveTurn(m_currentEnemy, moveIdx, false);
+    int playerMoveIdx = battleScreen->selectedPlayerMoveIndex();
+    int beastMoveIdx  = battleScreen->selectedBeastMoveIndex();
 
+    GameManager::ActionLog log;
+    bool finished = gameManager.ResolveAction(m_currentEnemy,
+                                              playerMoveIdx,
+                                              beastMoveIdx,
+                                              log);
+
+    m_round++; // ronde teller
+
+    // eerste actie direct tonen
+    int step = 0;
+    if (!log.actions[step].text.isEmpty())
+        battleScreen->setActionText(log.actions[step].text);
+
+    // HP na eerste hit updaten
     battleScreen->updatePlayerHP(player.GetCurrentHP(), player.GetMaxHP());
     battleScreen->updateEnemyHP(m_currentEnemy.GetCurrentHP(),
                                 m_currentEnemy.GetMaxHP());
-    battleScreen->setRound(++m_round);
+    battleScreen->setRound(m_round);
 
-    if (finished) {
-        if (m_currentEnemy.GetCurrentHP() <= 0) {
-            player.RewardAfterBeastDefeat(m_currentEnemy,
-                                          m_currentEnemy.GetCatchRate() * m_currentEnemy.GetLevel(),
-                                          m_currentEnemy.GetCatchRate() * m_currentEnemy.GetLevel());
-            battleScreen->setActionText("Enemy defeated! Reward received.");
-        } else {
-            battleScreen->setActionText("You were defeated...");
+    // volgende acties met korte pauze (bijv. 500 ms)
+    auto showNext = [this, log, finished](int step) mutable {
+        if (step >= 3) return;
+        if (log.actions[step].text.isEmpty()) return;
+
+        battleScreen->appendActionText(log.actions[step].text);
+        PlayerClass &player = gameManager.GetPlayer();
+        battleScreen->updatePlayerHP(player.GetCurrentHP(), player.GetMaxHP());
+        battleScreen->updateEnemyHP(m_currentEnemy.GetCurrentHP(),
+                                    m_currentEnemy.GetMaxHP());
+
+        if (step == 2 && finished) {
+            // battle afronden na laatste actie
+            finishBattle();
         }
-
-        QTimer::singleShot(1500, this, [this]() {
-            gameManager.NextStage();
-            showChoiceScreen();
+    };
+    qDebug() << "onBattleAttack eind, id =" << thisId;
+    if (!log.actions[1].text.isEmpty()) {
+        QTimer::singleShot(1500, this, [this, log, showNext]() mutable {
+            showNext(1);
+            if (!log.actions[2].text.isEmpty()) {
+                QTimer::singleShot(1500, this, [this, log, showNext]() mutable {
+                    showNext(2);
+                });
+            }
         });
+    } else if (finished) {
+        QTimer::singleShot(1500, this, [this]() { finishBattle(); });
     }
-    QTimer::singleShot(2500, this, [this](){});
-    // geen else nodig: speler kan gewoon opnieuw klikken
 }
+
+void MainWindow::finishBattle()
+{
+    m_round = 0;
+    PlayerClass &player = gameManager.GetPlayer();
+    if (m_currentEnemy.GetCurrentHP() <= 0) {
+        player.RewardAfterBeastDefeat(m_currentEnemy, m_currentEnemy.GetCatchRate() * player.GetLevel(),m_currentEnemy.GetCatchRate() * player.GetLevel());
+        battleScreen->appendActionText("Enemy defeated! Reward received.");
+    } else {
+        battleScreen->appendActionText("You were defeated...");
+    }
+
+    QTimer::singleShot(1500, this, [this]() {
+        gameManager.NextStage();
+        showChoiceScreen();
+    });
+}
+
 
 void MainWindow::onBattleCatch()
 {

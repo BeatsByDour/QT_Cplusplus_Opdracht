@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Afbeeldingen/Aquapup.png</file>
+        <file>Afbeeldingen/Flamefox.png</file>
+        <file>Afbeeldingen/Frostfish.png</file>
+        <file>Afbeeldingen/Player.png</file>
+        <file>Afbeeldingen/Pyrowing.png</file>
+        <file>Afbeeldingen/Terrakid.png</file>
+    </qresource>
+</RCC>

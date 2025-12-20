@@ -9,60 +9,78 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR})
-
-
-
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
-set(PROJECT_SOURCES
-    main.cpp
-    mainwindow.cpp mainwindow.h mainwindow.ui
+# === paden naar jouw mappen ===
+set(SRC_DIR   ${CMAKE_CURRENT_SOURCE_DIR}/SourceFiles)
+set(HDR_DIR   ${CMAKE_CURRENT_SOURCE_DIR}/HeaderFiles)
 
+# === alle bronnen ===
+set(PROJECT_SOURCES
+    ${SRC_DIR}/main.cpp
+    ${SRC_DIR}/mainwindow.cpp
+    ${HDR_DIR}/mainwindow.h
+    ${SRC_DIR}/mainwindow.ui
+
+    ${SRC_DIR}/gamemanager.cpp
+    ${HDR_DIR}/gamemanager.h
+
+    ${SRC_DIR}/characterclass.cpp
+    ${HDR_DIR}/characterclass.h
+
+    ${SRC_DIR}/playerclass.cpp
+    ${HDR_DIR}/playerclass.h
+
+    ${SRC_DIR}/Creatureclass.cpp
+    ${HDR_DIR}/Creatureclass.h
+
+    ${SRC_DIR}/creaturedatabase.cpp
+    ${HDR_DIR}/creaturedatabase.h
+
+    ${SRC_DIR}/battlescreen.cpp
+    ${HDR_DIR}/battlescreen.h
+    ${SRC_DIR}/battlescreen.ui
+
+    ${SRC_DIR}/choicescreen.cpp
+    ${HDR_DIR}/choicescreen.h
+    ${SRC_DIR}/choicescreen.ui
+
+    ${SRC_DIR}/partyscreen.cpp
+    ${HDR_DIR}/partyscreen.h
+    ${SRC_DIR}/partyscreen.ui
+
+    ${SRC_DIR}/storescreen.cpp
+    ${HDR_DIR}/storescreen.h
+    ${SRC_DIR}/storescreen.ui
+
+    ${HDR_DIR}/move.h
+    ${SRC_DIR}/totalmovesclass.cpp
+    ${HDR_DIR}/totalmovesclass.h
+
+    ${HDR_DIR}/equipment.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(CplusPlusTaak
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        gamemanager.h gamemanager.cpp
-        characterclass.h characterclass.cpp
-        playerclass.h playerclass.cpp
-        Creatureclass.h Creatureclass.cpp
-        move.h move.cpp
-        totalmovesclass.h totalmovesclass.cpp
-        creaturedatabase.h creaturedatabase.cpp
-        equipment.h equipment.cpp
-        choicescreen.cpp choicescreen.h choicescreen.ui
-        startscreen.cpp startscreen.h startscreen.ui
-        storescreen.h storescreen.cpp storescreen.ui
-        battlescreen.h battlescreen.cpp battlescreen.ui
-        partyscreen.h partyscreen.cpp partyscreen.ui
     )
-# Define target properties for Android with Qt 6 as:
-#    set_property(TARGET CplusPlusTaak APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
-#                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
-# For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
 else()
-    if(ANDROID)
-        add_library(CplusPlusTaak SHARED
-            ${PROJECT_SOURCES}
-        )
-# Define properties for Android with Qt 5 after find_package() calls as:
-#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
-    else()
-        add_executable(CplusPlusTaak
-            ${PROJECT_SOURCES}
-        )
-    endif()
+    add_executable(CplusPlusTaak
+        ${PROJECT_SOURCES}
+    )
 endif()
+
+# include‑paden voor je headers
+target_include_directories(CplusPlusTaak PRIVATE
+    ${HDR_DIR}
+    ${SRC_DIR}
+    ${FORMS_DIR}
+)
 
 target_link_libraries(CplusPlusTaak PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
-# Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
-# If you are developing for iOS or macOS you should consider setting an
-# explicit, fixed bundle identifier manually though.
 if(${QT_VERSION} VERSION_LESS 6.1.0)
   set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.CplusPlusTaak)
 endif()

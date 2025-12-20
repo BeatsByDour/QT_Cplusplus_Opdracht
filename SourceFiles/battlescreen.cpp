@@ -7,6 +7,8 @@ BattleScreen::BattleScreen(QWidget *parent)
 {
     ui->setupUi(this);
 
+    static int connectAttackCount = 0;
+    qDebug() << "Connecting Attack, count =" << ++connectAttackCount;
     connect(ui->btnAttack, &QPushButton::clicked,this,&BattleScreen::on_btnAttack_clicked);
     connect(ui->btnCatch, &QPushButton::clicked,this,&BattleScreen::on_btnCatch_clicked);
     connect(ui->btnRun, &QPushButton::clicked,this,&BattleScreen::on_btnEscape_clicked);
@@ -39,6 +41,7 @@ void BattleScreen::setupBattle(const PlayerClass &player,
                                 .arg(QString::fromStdString(player.GetName()))
                                 .arg(player.GetLevel());
     ui->lbl_P_Name->setText(playerNameLvl);
+    ui->lbl_P_Image->setPixmap(player.GetVisualImage().scaled(100,100,Qt::KeepAspectRatio));
 
     // Player HP bar + tekst
     ui->pbr_Player->setMaximum(player.GetMaxHP());
@@ -60,6 +63,7 @@ void BattleScreen::setupBattle(const PlayerClass &player,
                                    .arg(activeBeast->GetLevel());
         ui->lbl_B_Name->setText(beastNameLvl);
 
+        ui->lbl_B_Image->setPixmap(activeBeast->GetVisualImage().scaled(100,100,Qt::KeepAspectRatio));
         ui->pbr_Beasts->setMaximum(activeBeast->GetMaxHP());
         ui->pbr_Beasts->setValue(activeBeast->GetCurrentHP());
         ui->lbl_B_hp_Value->setText(
@@ -81,7 +85,7 @@ void BattleScreen::setupBattle(const PlayerClass &player,
                                .arg(QString::fromStdString(enemy.GetName()))
                                .arg(enemy.GetLevel());
     ui->lbl_E_Name->setText(enemyNameLvl);
-
+    ui->lbl_E_Image->setPixmap(enemy.GetVisualImage().scaled(100,100,Qt::KeepAspectRatio));
     ui->pbr_Enemy->setMaximum(enemy.GetMaxHP());
     ui->pbr_Enemy->setValue(enemy.GetCurrentHP());
 
@@ -117,7 +121,10 @@ int BattleScreen::selectedPlayerMoveIndex() const
 {
     return ui->PlayerMoves->currentData().toInt();
 }
-
+int BattleScreen::selectedBeastMoveIndex() const
+{
+    return ui->BeastsMoves->currentData().toInt();
+}
 QString BattleScreen::selectedPlayerMoveName() const
 {
     return ui->PlayerMoves->currentText();

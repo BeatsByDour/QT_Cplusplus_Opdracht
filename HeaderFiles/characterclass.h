@@ -4,6 +4,8 @@
 #include <string>
 #include "iostream"
 #include "move.h"
+#include "qstring"
+#include "QPixmap"
 
     // Punt 2: Useful and correct abstraction - CharacterClass beschrijft wat elk karakter KAN (HP, damage, acties) zonder te weten of het een speler of vijand is.
     // Punt 7: Useful and correct base class - CharacterClass is de gemeenschappelijke basis voor alle soorten karakters.
@@ -29,19 +31,26 @@ protected:
     int iMArmorPerLevel;
     int speedPerLevel;
     Status m_status{Status::None};
-    float hpScalePerLevel{1.0f};
-    float pDamageScalePerLevel{1.0f};
-    float mDamageScalePerLevel{1.0f};
-    float pArmorScalePerLevel{1.0f};
-    float mArmorScalePerLevel{1.0f};
-    float speedScalePerLevel{1.0f};
+    // in CharacterClass.h, protected:
+    bool bGoodHP{false};
+    bool bGoodPDamage{false};
+    bool bGoodMDamage{false};
+    bool bGoodPArmor{false};
+    bool bGoodMArmor{false};
+    bool bGoodSpeed{false};
+    QPixmap VisualImage;
+
 public:
 
     // constructor
     CharacterClass(const std::string& sName,
-                   int iMaxHp,
-                   int iDamage,
-                   int speed);
+                   int maxHp,
+                   int pDamage,
+                   int mDamage,
+                   int pArmor,
+                   int mArmor,
+                   int speed,
+               QString VisualImage);
 
     Status GetStatus() const { return m_status; }
     void SetStatus(Status s) { m_status = s; }
@@ -57,6 +66,8 @@ public:
     int GetMDamage() const {return iMDamage;}
     int GetPArmor()  const { return iPArmor;  }
     int GetMArmor()  const { return iMArmor;  }
+    const QPixmap &GetVisualImage() const { return VisualImage; }
+
 
 
     // level / XP

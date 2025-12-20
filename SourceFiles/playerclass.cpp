@@ -1,28 +1,29 @@
 #include "PlayerClass.h"
 #include <iostream>
-#include <algorithm> // std::clamp
+#include <algorithm>
+
 
 PlayerClass::PlayerClass(const std::string& name,
                          int maxHP,
-                         int damage,
+                         int pDamage,
+                         int mDamage,
+                         int pArmor,
+                         int mArmor,
                          int speed,
                          const std::array<Move, 2>& playerMoves,
-                         float scalingHP,
-                         float scalingdamage,
-                         float scalingspeed,
-                         float scalingarmor)
-    : CharacterClass(name, maxHP, damage, speed),
-    m_playerMoves(playerMoves),
-    playerHpScale(scalingHP),
-    playerDamageScale(scalingdamage),
-    playerSpeedScale(scalingspeed),
-    playerArmorScale(scalingarmor)
+                         QString playerimage)
+    : CharacterClass(name, maxHP, pDamage, mDamage, pArmor, mArmor, speed, playerimage),
+    m_playerMoves(playerMoves)
 {
-    hpScalePerLevel      = playerHpScale;       // bv. 1.5 → ~15 HP/level
-    pDamageScalePerLevel = playerDamageScale;   // 1.2 → ~2–3 dmg/level
-    pArmorScalePerLevel  = playerArmorScale;
-    speedScalePerLevel   = playerSpeedScale;
+    // Definieer sterke stats van de speler
+    bGoodHP      = true;
+    bGoodPDamage = true;
+    bGoodMDamage = true;
+    bGoodPArmor  = false;
+    bGoodMArmor  = false;
+    bGoodSpeed   = true;
 }
+
 
 
 void PlayerClass::PrintName() const

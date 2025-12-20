@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>BattleScreen</class>
- <widget class="QWidget" name="BattleScreen">
+ <class>ChoiceScreen</class>
+ <widget class="QWidget" name="ChoiceScreen">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -482,409 +482,311 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <property name="autoFillBackground">
-   <bool>false</bool>
-  </property>
-  <widget class="QComboBox" name="PlayerMoves">
+  <widget class="QPushButton" name="btnEncounter">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>430</y>
-     <width>121</width>
-     <height>24</height>
+     <x>15</x>
+     <y>213</y>
+     <width>161</width>
+     <height>61</height>
     </rect>
    </property>
-  </widget>
-  <widget class="QPushButton" name="btnAttack">
-   <property name="geometry">
-    <rect>
-     <x>600</x>
-     <y>420</y>
-     <width>121</width>
-     <height>31</height>
-    </rect>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
    </property>
    <property name="text">
-    <string>Attack</string>
+    <string>Start Encounter</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="btnCatch">
+  <widget class="QPushButton" name="btnParty">
    <property name="geometry">
     <rect>
-     <x>600</x>
-     <y>460</y>
-     <width>121</width>
-     <height>31</height>
+     <x>15</x>
+     <y>333</y>
+     <width>161</width>
+     <height>61</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
    <property name="text">
-    <string>Catch</string>
+    <string>View Party</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="btnRun">
+  <widget class="QPushButton" name="btnQuit">
    <property name="geometry">
     <rect>
-     <x>600</x>
+     <x>590</x>
      <y>500</y>
-     <width>121</width>
+     <width>131</width>
      <height>31</height>
     </rect>
    </property>
    <property name="text">
-    <string>Run</string>
+    <string>Quit game</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="BeastsMoves">
+  <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>490</y>
+     <x>10</x>
+     <y>3</y>
+     <width>131</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Player stats:</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnStore">
+   <property name="geometry">
+    <rect>
+     <x>15</x>
+     <y>463</y>
+     <width>161</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>View Store</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>15</x>
+     <y>293</y>
+     <width>201</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Number of Beasts:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>15</x>
+     <y>423</y>
+     <width>211</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Number of Potions:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_StageValue">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>0</y>
      <width>121</width>
-     <height>24</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>460</x>
-     <y>410</y>
-     <width>91</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>player moves:</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="lbl_Beasts_Moves_Text">
-   <property name="geometry">
-    <rect>
-     <x>460</x>
-     <y>470</y>
-     <width>81</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Beasts moves:</string>
-   </property>
-  </widget>
-  <widget class="Line" name="line">
-   <property name="geometry">
-    <rect>
-     <x>400</x>
-     <y>380</y>
-     <width>361</width>
-     <height>21</height>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="lineWidth">
-    <number>2</number>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Orientation::Horizontal</enum>
-   </property>
-  </widget>
-  <widget class="Line" name="line_2">
-   <property name="geometry">
-    <rect>
-     <x>393</x>
-     <y>389</y>
-     <width>16</width>
-     <height>221</height>
-    </rect>
-   </property>
-   <property name="lineWidth">
-    <number>2</number>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Orientation::Vertical</enum>
-   </property>
-  </widget>
-  <widget class="QProgressBar" name="pbr_Player">
-   <property name="geometry">
-    <rect>
-     <x>400</x>
-     <y>360</y>
-     <width>341</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="value">
-    <number>24</number>
-   </property>
-   <property name="textVisible">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QLabel" name="lbl_P_Hp_Value">
-   <property name="geometry">
-    <rect>
-     <x>400</x>
-     <y>360</y>
-     <width>341</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>12</pointsize>
+     <pointsize>18</pointsize>
     </font>
    </property>
    <property name="text">
-    <string>0/0</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignmentFlag::AlignCenter</set>
+    <string>0</string>
    </property>
   </widget>
-  <widget class="QLabel" name="lbl_B_hp_Value">
+  <widget class="QLabel" name="lbl_BeastsValue">
    <property name="geometry">
     <rect>
-     <x>400</x>
-     <y>310</y>
-     <width>341</width>
-     <height>21</height>
+     <x>218</x>
+     <y>289</y>
+     <width>61</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>12</pointsize>
+     <pointsize>18</pointsize>
     </font>
    </property>
    <property name="text">
-    <string>0/0</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignmentFlag::AlignCenter</set>
+    <string>0</string>
    </property>
   </widget>
-  <widget class="QProgressBar" name="pbr_Beasts">
+  <widget class="QLabel" name="lbl_PotionsValue">
    <property name="geometry">
     <rect>
-     <x>400</x>
-     <y>310</y>
-     <width>341</width>
-     <height>23</height>
+     <x>230</x>
+     <y>420</y>
+     <width>61</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>12</pointsize>
+     <pointsize>18</pointsize>
     </font>
    </property>
-   <property name="value">
-    <number>24</number>
-   </property>
-   <property name="textVisible">
-    <bool>false</bool>
+   <property name="text">
+    <string>0</string>
    </property>
   </widget>
-  <widget class="QProgressBar" name="pbr_Enemy">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>40</y>
-     <width>331</width>
-     <height>23</height>
+     <width>171</width>
+     <height>156</height>
     </rect>
    </property>
-   <property name="font">
-    <font>
-     <pointsize>12</pointsize>
-    </font>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="1" column="1" rowspan="2">
+     <widget class="QLabel" name="lbl_Dmg_Value">
+      <property name="frameShadow">
+       <enum>QFrame::Shadow::Raised</enum>
+      </property>
+      <property name="text">
+       <string>0</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="1" rowspan="2">
+     <widget class="QLabel" name="lbl_Level_Value">
+      <property name="text">
+       <string>0</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1" rowspan="2">
+     <widget class="QLabel" name="lblSpeed_Value">
+      <property name="text">
+       <string>0</string>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="1" rowspan="2">
+     <widget class="QLabel" name="lbl_Exp_Value">
+      <property name="text">
+       <string>0</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1" rowspan="2">
+     <widget class="QLabel" name="lbl_Armor_Value">
+      <property name="text">
+       <string>0</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLabel" name="lbl_Hp_Value">
+      <property name="text">
+       <string>0</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="lbl_hp">
+      <property name="text">
+       <string>HP:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" rowspan="2">
+     <widget class="QLabel" name="lbl_Dmg">
+      <property name="text">
+       <string>DMG:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0" rowspan="2">
+     <widget class="QLabel" name="lbl_Armor">
+      <property name="text">
+       <string>Armor:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0" rowspan="2">
+     <widget class="QLabel" name="lbl_Speed">
+      <property name="text">
+       <string>Speed:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="0" rowspan="2">
+     <widget class="QLabel" name="lbl_Level">
+      <property name="text">
+       <string>Level:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="0" rowspan="2">
+     <widget class="QLabel" name="lbl_Exp">
+      <property name="text">
+       <string>Experience:</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QLabel" name="PLayerLabel">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>60</y>
+     <width>231</width>
+     <height>381</height>
+    </rect>
    </property>
-   <property name="value">
-    <number>24</number>
+   <property name="frameShape">
+    <enum>QFrame::Shape::NoFrame</enum>
    </property>
-   <property name="textVisible">
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources.qrc">:/Afbeeldingen/Player.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+   <property name="wordWrap">
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QLabel" name="lbl_Round">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>400</y>
-     <width>321</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Round: 0</string>
-   </property>
-  </widget>
-  <widget class="QGraphicsView" name="PLayerimmage">
-   <property name="geometry">
-    <rect>
-     <x>400</x>
-     <y>20</y>
-     <width>331</width>
-     <height>261</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QGraphicsView" name="PLayerimmage_2">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>70</y>
-     <width>331</width>
-     <height>311</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="Line" name="line_3">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>381</y>
-     <width>361</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="lineWidth">
-    <number>2</number>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Orientation::Horizontal</enum>
-   </property>
-  </widget>
-  <widget class="Line" name="line_4">
-   <property name="geometry">
-    <rect>
-     <x>350</x>
-     <y>390</y>
-     <width>16</width>
-     <height>221</height>
-    </rect>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::LayoutDirection::RightToLeft</enum>
-   </property>
-   <property name="autoFillBackground">
-    <bool>false</bool>
-   </property>
-   <property name="frameShadow">
-    <enum>QFrame::Shadow::Raised</enum>
-   </property>
-   <property name="lineWidth">
-    <number>2</number>
-   </property>
-   <property name="midLineWidth">
-    <number>1</number>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Orientation::Vertical</enum>
-   </property>
-  </widget>
-  <widget class="QLabel" name="lbl_actions">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>430</y>
-     <width>321</width>
-     <height>111</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Actions: 0</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="lbl_B_Name">
-   <property name="geometry">
-    <rect>
-     <x>400</x>
-     <y>290</y>
-     <width>211</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>LVL X :  BeastName </string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="lbl_P_Name">
-   <property name="geometry">
-    <rect>
-     <x>400</x>
-     <y>340</y>
-     <width>251</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>LVL X :  PlayerName </string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="lbl_E_Name">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>331</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>LVL X :  BeastName </string>
-   </property>
-  </widget>
-  <zorder>pbr_Beasts</zorder>
-  <zorder>line_3</zorder>
-  <zorder>line_4</zorder>
-  <zorder>PlayerMoves</zorder>
-  <zorder>btnAttack</zorder>
-  <zorder>btnCatch</zorder>
-  <zorder>btnRun</zorder>
-  <zorder>BeastsMoves</zorder>
-  <zorder>label</zorder>
-  <zorder>lbl_Beasts_Moves_Text</zorder>
-  <zorder>line</zorder>
-  <zorder>line_2</zorder>
-  <zorder>pbr_Player</zorder>
-  <zorder>lbl_P_Hp_Value</zorder>
-  <zorder>lbl_B_hp_Value</zorder>
-  <zorder>pbr_Enemy</zorder>
-  <zorder>PLayerimmage</zorder>
-  <zorder>PLayerimmage_2</zorder>
-  <zorder>lbl_Round</zorder>
-  <zorder>lbl_actions</zorder>
-  <zorder>lbl_B_Name</zorder>
-  <zorder>lbl_P_Name</zorder>
-  <zorder>lbl_E_Name</zorder>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

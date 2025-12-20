@@ -21,6 +21,7 @@ public:
                      const CreatureClass *activeBeast, // nullptr als geen beast
                      const CreatureClass &enemy);
     int selectedPlayerMoveIndex() const;
+    int selectedBeastMoveIndex() const;
     QString  selectedPlayerMoveName() const;
     void updateEnemyHP(int current, int max, const QString &actionText);
     void appendActionText(const QString &line);

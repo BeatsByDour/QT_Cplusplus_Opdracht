@@ -16,10 +16,6 @@ private:
     std::array<Move, 2> m_playerMoves;           // 2 moves van de speler zelf
     std::array<CreatureClass, 4> m_caughtBeasts; // party van 4
     int m_activeBeastIndex{0};                   // welke beast is actief?
-    float playerHpScale;
-    float playerDamageScale;
-    float playerSpeedScale;
-    float playerArmorScale;
 
     Equipment m_weapon;
     Equipment m_armor;
@@ -37,13 +33,13 @@ private:
 public:
     PlayerClass(const std::string& name,
                 int maxHP,
-                int damage,
+                int pDamage,
+                int mDamage,
+                int pArmor,
+                int mArmor,
                 int speed,
                 const std::array<Move, 2>& playerMoves,
-                float hpScale = 1.2f,
-                float dmgScale = 1.2f,
-                float spdScale = 1.0f,
-                float ArmScale = 1.2f);
+                QString playerImage);
     // Interface uit CharacterClass
     void PrintName() const override;
 

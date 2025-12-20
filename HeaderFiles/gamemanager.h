@@ -23,11 +23,22 @@ public:
     const PlayerClass& GetPlayer() const { return m_player; }
 
     int  GetStage() const { return m_stage; }   // getter
-    void NextStage()      { ++m_stage; }        // stage++
-    bool ResolveTurn(CreatureClass &enemy, int playerMoveIndex, bool useBeastMove);
+    void NextStage()      { m_stage++; }        // stage++
     int  CalculateDamage(const Move &move,
                         const CharacterClass &attacker,
                         CharacterClass &defender);
+    struct ActionEntry {
+        QString text;
+    };
+
+    struct ActionLog {
+        ActionEntry actions[3]; // max 3 aanvallen in een ronde
+    };
+
+    bool ResolveAction(CreatureClass &enemy,
+                       int playerMoveIndex,
+                       int beastMoveIndex,
+                       ActionLog &log);
 
 
     CreatureClass GenerateRandomEnemy();
