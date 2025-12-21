@@ -44,7 +44,7 @@ git --version
 2. Select **Import Project → Git Clone**
 3. Enter the repository URL:
    ```
-   https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
+   https://github.com/BeatsByDour/QT_Cplusplus_Opdracht.git
    ```
 4. Choose a local directory for the project
 5. Click **Clone**
@@ -59,7 +59,7 @@ git --version
 #### Step 1: Download the Project
 ```bash
 # Using Git (recommended)
-git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
+git clone  https://github.com/BeatsByDour/QT_Cplusplus_Opdracht.git
 cd YOUR_REPOSITORY
 
 # OR download as ZIP:
@@ -72,7 +72,7 @@ cd YOUR_REPOSITORY
 1. Open **Qt Creator**
 2. Go to **File → Open File or Project**
 3. Navigate to the project folder
-4. Select the **.pro file** (e.g., `BeastsBattle.pro`)
+4. Select the **.pro file** (e.g., `CplusPlusTaak.pro`)
 5. Click **Open**
 6. Select the Kit when prompted
 7. Click **Configure Project**
@@ -130,26 +130,7 @@ cd YOUR_REPOSITORY
   - Ensure all resource files exist (e.g., `gameStyle.qss`)
   - Run in Debug mode with breakpoints
 
----
 
-## 📁 Project Structure
-
-```
-BeastsBattle/
-├── main.cpp              # Application entry point
-├── BeastsBattle.pro      # Qt Project file
-├── gameStyle.qss         # Stylesheet (must be in executable directory)
-├── includes/            # Header files
-│   ├── mainwindow.h
-│   ├── startscreen.h
-│   └── ...
-└── src/                 # Source files
-    ├── mainwindow.cpp
-    ├── startscreen.cpp
-    └── ...
-```
-
----
 
 ## 🎯 Quick Test
 
@@ -180,8 +161,7 @@ If you encounter issues:
 
 1. **Check Qt Creator's Compile Output** for specific error messages
 2. **Verify all prerequisites** are installed correctly
-3. **Check file paths** - ensure `gameStyle.qss` is in the right location
-4. **Search Qt documentation**: [https://doc.qt.io/](https://doc.qt.io/)
+3. **Search Qt documentation**: [https://doc.qt.io/](https://doc.qt.io/)
 
 ---
 
