@@ -7,11 +7,11 @@ BattleScreen::BattleScreen(QWidget *parent)
 {
     ui->setupUi(this);
 
-    static int connectAttackCount = 0;
-    qDebug() << "Connecting Attack, count =" << ++connectAttackCount;
-    connect(ui->btnAttack, &QPushButton::clicked,this,&BattleScreen::on_btnAttack_clicked);
-    connect(ui->btnCatch, &QPushButton::clicked,this,&BattleScreen::on_btnCatch_clicked);
-    connect(ui->btnRun, &QPushButton::clicked,this,&BattleScreen::on_btnEscape_clicked);
+   // static int connectAttackCount = 0;
+   // qDebug() << "Connecting Attack, count =" << ++connectAttackCount;
+   // connect(ui->btnAttack, &QPushButton::clicked,this,&BattleScreen::on_btnAttack_clicked);
+   // connect(ui->btnCatch, &QPushButton::clicked,this,&BattleScreen::on_btnCatch_clicked);
+//    connect(ui->btnRun, &QPushButton::clicked,this,&BattleScreen::on_btnEscape_clicked);
 
 }
 
@@ -27,10 +27,11 @@ void BattleScreen::on_btnCatch_clicked()
 {
     emit Catch();
 }
-void BattleScreen::on_btnEscape_clicked()
+void BattleScreen::on_btnRun_clicked()
 {
     emit Escape();
 }
+
 
 void BattleScreen::setupBattle(const PlayerClass &player,
                                const CreatureClass *activeBeast,
@@ -129,7 +130,15 @@ QString BattleScreen::selectedPlayerMoveName() const
 {
     return ui->PlayerMoves->currentText();
 }
-
+void BattleScreen::updateBeastHP(int current, int max)
+{
+    if (ui->pbr_Beasts->isVisible()) {
+        ui->pbr_Beasts->setMaximum(max);
+        ui->pbr_Beasts->setValue(current);
+        ui->lbl_B_hp_Value->setText(
+            QString("%1/%2").arg(current).arg(max));
+    }
+}
 void BattleScreen::updateEnemyHP(int current, int max, const QString &actionText)
 {
     ui->pbr_Enemy->setMaximum(max);
@@ -139,7 +148,15 @@ void BattleScreen::updateEnemyHP(int current, int max, const QString &actionText
 }
 void BattleScreen::appendActionText(const QString &line)
 {
-    ui->lbl_actions->setText(line);
+    QString currentText = ui->lbl_actions->text();
+
+    if (currentText.isEmpty()) {
+        // Als er nog geen tekst is, zet de nieuwe tekst
+        ui->lbl_actions->setText(line);
+    } else {
+        // Anders voeg toe op een nieuwe regel
+        ui->lbl_actions->setText(currentText + "\n" + line);
+    }
 }
 
 void BattleScreen::updatePlayerHP(int current, int max)
@@ -165,6 +182,11 @@ void BattleScreen::setActionText(const QString &txt)
 {
     ui->lbl_actions->setText(txt);
 }
+void BattleScreen::clearActionText()
+{
+    ui->lbl_actions->setText(" ");
+}
+
 
 
 

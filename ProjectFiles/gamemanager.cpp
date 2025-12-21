@@ -22,6 +22,7 @@ GameManager::GameManager()
     // speler naar level 5 brengen
     for (int i = 1; i < 5; ++i) {
         m_player.LevelUp();
+         CharacterDebugger::PrintDetailedStats(m_player);
     }
     InitializePlayer();
 }
@@ -32,6 +33,7 @@ void GameManager::InitializePlayer()
     startMoves[0] = Move{1001, "Punch", 30, 100, 999, MoveCategory::Physical, Type::Earth};
     startMoves[1] = Move{1002, "Kick", 25, 100, 999, MoveCategory::Physical, Type::Air};
     m_player.SetMoves(startMoves);
+
 }
 
 CreatureClass GameManager::GenerateRandomEnemy()
@@ -48,14 +50,43 @@ CreatureClass GameManager::GenerateRandomEnemy()
     while (enemy.GetLevel() < targetLevel) {
         enemy.LevelUp();
     }
+    CharacterDebugger::PrintDetailedStats(enemy);
     return enemy;
 }
 
+void GameManager::resetGame()
+{
+    // Reset player naar beginwaarden
+    m_player = PlayerClass(
+        "player",
+        50,   // maxHP
+        15,   // pDamage
+        10,   // mDamage
+        5,    // pArmor
+        3,    // mArmor
+        15,   // speed
+        std::array<Move, 2>{}, // moves worden in InitializePlayer gezet
+        "C:\\Users\\BeatsByDour\\Documents\\CplusPlusTaak\\Afbeeldingen\\player.png"
+        );
+
+    // Speler naar level 5 brengen
+    for (int i = 1; i < 5; ++i) {
+        m_player.LevelUp();
+    }
+
+    // Initialize moves
+    InitializePlayer();
+
+    // Reset stage
+    m_stage = 1;
+
+}
 
 int GameManager::CalculateDamage(const Move &move,
                                  const CharacterClass &attacker,
                                  CharacterClass &defender)
 {
+
     // kies attack/armor type
     double atk  = (move.category == MoveCategory::Physical)
                      ? attacker.GetPDamage()
@@ -67,17 +98,16 @@ int GameManager::CalculateDamage(const Move &move,
     if (armor < 1.0) armor = 1.0; // deling door 0 voorkomen
 
     double raw = static_cast<double>(move.power) + atk / armor;
-    int dmg = static_cast<int>(std::max(1.0, raw)); // min. 1 dmg
+    int dmg = static_cast<int>(std::max(1.0, raw));
 
     defender.RecieveHit(dmg, defender.GetCurrentHP());
     return dmg;
 }
 
-// GameManager.cpp
 static const Move& GetRandomEnemyMove(const CreatureClass& enemy)
 {
-    int count = enemy.GetMoveCount();   // bij jou normaal 4
-    int idx = std::rand() % count;      // 0..3
+    int count = enemy.GetMoveCount();
+    int idx = std::rand() % count;
     return enemy.GetMove(idx);
 }
 
@@ -87,6 +117,11 @@ bool GameManager::ResolveAction(CreatureClass &enemy,
                                 int beastMoveIndex,
                                 ActionLog &log)
 {
+    try {
+        if (playerMoveIndex < 0 || playerMoveIndex >= 2) {
+            throw std::out_of_range("Invalid player move index");
+        }
+
     PlayerClass &player      = m_player;
     CreatureClass &playerBeast = player.GetActiveBeast();
     bool hasBeast = !playerBeast.IsEmpty();
@@ -139,14 +174,13 @@ bool GameManager::ResolveAction(CreatureClass &enemy,
         }
     }
 
-    if(enemy.GetCurrentHP() <= 0 || (player.GetCurrentHP() <= 0 && (!hasBeast || playerBeast.GetCurrentHP() <= 0)))
-{
-return 0;
-}else {
-return 1;
-}
+    return enemy.GetCurrentHP() <= 0 ||
+           (player.GetCurrentHP() <= 0 && (!hasBeast || playerBeast.GetCurrentHP() <= 0));
+    } catch (const std::exception& e) {
+        std::cerr << "Battle error: " << e.what() << std::endl;
+        return false;
+    }
 
-  //  return enemy.GetCurrentHP() <= 0 || (player.GetCurrentHP() <= 0 && (!hasBeast || playerBeast.GetCurrentHP() <= 0));
 
 }
 

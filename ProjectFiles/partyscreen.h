@@ -3,6 +3,7 @@
 #define PARTYSCREEN_H
 
 #include <QWidget>
+#include "playerclass.h"
 
 namespace Ui {
 class PartyScreen;
@@ -16,14 +17,21 @@ public:
     explicit PartyScreen(QWidget *parent = nullptr);
     ~PartyScreen();
 
+    // Update de UI met party informatie
+    void updatePartyDisplay(const PlayerClass& player);
+
 signals:
     void returnToHomeScreen();
 
 private slots:
-    void on_btnReturn_Clicked();
+    void on_btnReturn_clicked();
 
 private:
     Ui::PartyScreen *ui;
+
+    // Helper functie om één beast slot te updaten
+    void updateBeastSlot(int slotIndex, const CreatureClass& beast);
+    void clearBeastSlot(int slotIndex);
 };
 
 #endif // PARTYSCREEN_H

@@ -15,6 +15,7 @@ class BattleScreen : public QWidget
 
 public:
     explicit BattleScreen(QWidget *parent = nullptr);
+    //desturctor
     ~BattleScreen();
 
     void setupBattle(const PlayerClass &player,
@@ -27,8 +28,10 @@ public:
     void appendActionText(const QString &line);
     void updatePlayerHP(int current, int max);
     void updateEnemyHP(int current, int max);
+    void updateBeastHP(int current, int max);
     void setRound(int r);
     void setActionText(const QString &txt);
+    void clearActionText();
 
     signals:
     void Escape();
@@ -36,7 +39,7 @@ public:
     void Catch();
 
     private slots:
-    void on_btnEscape_clicked();
+    void on_btnRun_clicked();
     void on_btnAttack_clicked();
     void on_btnCatch_clicked();
 

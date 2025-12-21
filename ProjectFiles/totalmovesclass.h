@@ -17,7 +17,7 @@ public:
     // Move opzoeken via id
     std::optional<Move> GetMoveById(int id) const;
 
-    // Eventueel: move opzoeken via naam
+    // Eventueel: move opzoeken via naam string class usage
     std::optional<Move> GetMoveByName(const std::string& name) const;
 
     const std::vector<Move>& GetAllMoves() const { return m_moves; }

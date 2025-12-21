@@ -6,5 +6,6 @@
         <file>Afbeeldingen/Player.png</file>
         <file>Afbeeldingen/Pyrowing.png</file>
         <file>Afbeeldingen/Terrakid.png</file>
+        <file>Style/gameStyle.qss</file>
     </qresource>
 </RCC>

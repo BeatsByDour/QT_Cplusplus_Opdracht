@@ -1,16 +1,15 @@
 #pragma once
 #ifndef MOVE_H
 #define MOVE_H
-
+#include <cstdint>
 #include <string>
-
 enum class MoveCategory
 {
     Physical,
     Special,
     Status
-};
-enum class Status
+};  // uint8_t voor memory efficiency
+enum class Status : uint8_t
 {
     None,
     Sleep,
@@ -20,7 +19,7 @@ enum class Status
     Freeze
 };
 
-enum class Type
+enum class Type : uint8_t
 {
     Earth,
     Water,
@@ -33,6 +32,7 @@ enum class Type
     Normal,
     Count // Voor loops/array sizes
 };
+// template struct
 struct Move
 {
     int     id{};

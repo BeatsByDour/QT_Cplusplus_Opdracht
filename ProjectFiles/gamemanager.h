@@ -5,6 +5,7 @@
 #include "TotalMovesClass.h"
 #include "CreatureDatabase.h"
 #include "PlayerClass.h"
+#include "characterdebugger.h"
 
 class GameManager
 {
@@ -21,7 +22,7 @@ public:
     // toegang tot player voor UI / MainWindow
     PlayerClass&       GetPlayer()       { return m_player; }
     const PlayerClass& GetPlayer() const { return m_player; }
-
+    void resetGame();
     int  GetStage() const { return m_stage; }   // getter
     void NextStage()      { m_stage++; }        // stage++
     int  CalculateDamage(const Move &move,

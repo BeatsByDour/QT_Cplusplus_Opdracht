@@ -2,7 +2,7 @@
 #include <iostream>
 #include <algorithm>
 
-
+//Constructor forwarding (via inheritance):
 PlayerClass::PlayerClass(const std::string& name,
                          int maxHP,
                          int pDamage,

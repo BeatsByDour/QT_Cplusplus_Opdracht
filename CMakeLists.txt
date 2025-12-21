@@ -13,58 +13,64 @@ find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
 # === paden naar jouw mappen ===
-set(SRC_DIR   ${CMAKE_CURRENT_SOURCE_DIR}/SourceFiles)
-set(HDR_DIR   ${CMAKE_CURRENT_SOURCE_DIR}/HeaderFiles)
+set(PRJ_DIR   ${CMAKE_CURRENT_SOURCE_DIR}/ProjectFiles)
 
 # === alle bronnen ===
 set(PROJECT_SOURCES
-    ${SRC_DIR}/main.cpp
-    ${SRC_DIR}/mainwindow.cpp
-    ${HDR_DIR}/mainwindow.h
-    ${SRC_DIR}/mainwindow.ui
+    ${PRJ_DIR}/main.cpp
+    ${PRJ_DIR}/mainwindow.cpp
+    ${PRJ_DIR}/mainwindow.h
+    ${PRJ_DIR}/mainwindow.ui
 
-    ${SRC_DIR}/gamemanager.cpp
-    ${HDR_DIR}/gamemanager.h
+    ${PRJ_DIR}/gamemanager.cpp
+    ${PRJ_DIR}/gamemanager.h
 
-    ${SRC_DIR}/characterclass.cpp
-    ${HDR_DIR}/characterclass.h
+    ${PRJ_DIR}/characterclass.cpp
+    ${PRJ_DIR}/characterclass.h
 
-    ${SRC_DIR}/playerclass.cpp
-    ${HDR_DIR}/playerclass.h
+    ${PRJ_DIR}/playerclass.cpp
+    ${PRJ_DIR}/playerclass.h
 
-    ${SRC_DIR}/Creatureclass.cpp
-    ${HDR_DIR}/Creatureclass.h
+    ${PRJ_DIR}/Creatureclass.cpp
+    ${PRJ_DIR}/Creatureclass.h
 
-    ${SRC_DIR}/creaturedatabase.cpp
-    ${HDR_DIR}/creaturedatabase.h
+    ${PRJ_DIR}/creaturedatabase.cpp
+    ${PRJ_DIR}/creaturedatabase.h
 
-    ${SRC_DIR}/battlescreen.cpp
-    ${HDR_DIR}/battlescreen.h
-    ${SRC_DIR}/battlescreen.ui
+    ${PRJ_DIR}/battlescreen.cpp
+    ${PRJ_DIR}/battlescreen.h
+    ${PRJ_DIR}/battlescreen.ui
 
-    ${SRC_DIR}/choicescreen.cpp
-    ${HDR_DIR}/choicescreen.h
-    ${SRC_DIR}/choicescreen.ui
+    ${PRJ_DIR}/choicescreen.cpp
+    ${PRJ_DIR}/choicescreen.h
+    ${PRJ_DIR}/choicescreen.ui
 
-    ${SRC_DIR}/partyscreen.cpp
-    ${HDR_DIR}/partyscreen.h
-    ${SRC_DIR}/partyscreen.ui
+    ${PRJ_DIR}/partyscreen.cpp
+    ${PRJ_DIR}/partyscreen.h
+    ${PRJ_DIR}/partyscreen.ui
 
-    ${SRC_DIR}/storescreen.cpp
-    ${HDR_DIR}/storescreen.h
-    ${SRC_DIR}/storescreen.ui
+    ${PRJ_DIR}/storescreen.cpp
+    ${PRJ_DIR}/storescreen.h
+    ${PRJ_DIR}/storescreen.ui
 
-    ${HDR_DIR}/move.h
-    ${SRC_DIR}/totalmovesclass.cpp
-    ${HDR_DIR}/totalmovesclass.h
+    ${PRJ_DIR}/startscreen.cpp
+    ${PRJ_DIR}/startscreen.h
+    ${PRJ_DIR}/startscreen.ui
 
-    ${HDR_DIR}/equipment.h
+    ${PRJ_DIR}/move.h
+    ${PRJ_DIR}/totalmovesclass.cpp
+    ${PRJ_DIR}/totalmovesclass.h
+
+    ${PRJ_DIR}/equipment.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(CplusPlusTaak
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        resources.qrc
+        ProjectFiles/characterdebugger.h ProjectFiles/characterdebugger.cpp
+
     )
 else()
     add_executable(CplusPlusTaak
@@ -74,10 +80,10 @@ endif()
 
 # include‑paden voor je headers
 target_include_directories(CplusPlusTaak PRIVATE
-    ${HDR_DIR}
-    ${SRC_DIR}
-    ${FORMS_DIR}
+    ${PRJ_DIR}
+
 )
+
 
 target_link_libraries(CplusPlusTaak PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 

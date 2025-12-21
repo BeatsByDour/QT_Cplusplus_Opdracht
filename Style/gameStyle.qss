@@ -1,0 +1,273 @@
+/* ===== ALGEMENE STIJL ===== */
+QWidget {
+    background-color: #2b2b2b; /* Donkere achtergrond */
+    color: #ffffff; /* Witte tekst */
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 14px;
+}
+
+/* ===== MAIN WINDOW ===== */
+QMainWindow {
+    background-color: #2b2b2b;
+    border: 1px solid #444;
+}
+
+/* ===== LABELS ===== */
+QLabel {
+    color: #ffffff;
+    background-color: transparent;
+    font-size: 14px;
+    padding: 2px;
+}
+
+/* Titel labels */
+QLabel[objectName*="Title"],
+QLabel[objectName*="Header"] {
+    font-size: 18px;
+    font-weight: bold;
+    color: #4da6ff;
+    padding: 5px;
+}
+
+/* Stats labels */
+QLabel[objectName*="Value"] {
+    color: #00cc66; /* Groen voor waarden */
+    font-weight: bold;
+}
+
+/* HP labels */
+QLabel[objectName*="Hp"] {
+    color: #ff6666; /* Rood voor HP */
+    font-weight: bold;
+}
+
+/* ===== BUTTONS ===== */
+QPushButton {
+    background-color: #3c3c3c;
+    color: white;
+    border: 2px solid #555;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-weight: bold;
+    font-size: 14px;
+    min-width: 100px;
+    min-height: 30px;
+}
+
+QPushButton:hover {
+    background-color: #4a4a4a;
+    border-color: #4da6ff;
+}
+
+QPushButton:pressed {
+    background-color: #2a2a2a;
+    border-color: #007acc;
+}
+
+QPushButton:disabled {
+    background-color: #2a2a2a;
+    color: #777;
+    border-color: #444;
+}
+
+/* Specifieke knoppen */
+QPushButton[objectName*="Attack"] {
+    background-color: #cc3333; /* Rood voor aanvallen */
+    border-color: #ff6666;
+}
+
+QPushButton[objectName*="Catch"] {
+    background-color: #33cc33; /* Groen voor vangen */
+    border-color: #66ff66;
+}
+
+QPushButton[objectName*="Run"],
+QPushButton[objectName*="Escape"] {
+    background-color: #6666cc; /* Blauw voor vluchten */
+    border-color: #8888ff;
+}
+
+QPushButton[objectName*="Start"] {
+    background-color: #0066cc;
+    border-color: #0088ff;
+    font-size: 16px;
+    padding: 10px 20px;
+}
+
+/* ===== COMBOBOXEN ===== */
+QComboBox {
+    background-color: #3c3c3c;
+    color: white;
+    border: 2px solid #555;
+    border-radius: 5px;
+    padding: 5px;
+    min-height: 25px;
+}
+
+QComboBox:hover {
+    border-color: #4da6ff;
+}
+
+QComboBox::drop-down {
+    border: none;
+    width: 20px;
+}
+
+QComboBox::down-arrow {
+    image: url(down_arrow.png);
+    width: 12px;
+    height: 12px;
+}
+
+QComboBox QAbstractItemView {
+    background-color: #3c3c3c;
+    color: white;
+    selection-background-color: #4da6ff;
+    selection-color: white;
+    border: 1px solid #555;
+}
+
+/* ===== PROGRESS BARS ===== */
+QProgressBar {
+    border: 1px solid #555;
+    border-radius: 3px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}
+
+QProgressBar::chunk {
+    border-radius: 2px;
+}
+
+/* Player HP bar */
+QProgressBar[objectName*="Player"]::chunk {
+    background-color: #33cc33; /* Groen voor player */
+}
+
+/* Beast HP bar */
+QProgressBar[objectName*="Beast"]::chunk {
+    background-color: #ff9933; /* Oranje voor beast */
+}
+
+/* Enemy HP bar */
+QProgressBar[objectName*="Enemy"]::chunk {
+    background-color: #cc3333; /* Rood voor enemy */
+}
+
+/* ===== GROUPBOXES & FRAMES ===== */
+QGroupBox {
+    border: 2px solid #555;
+    border-radius: 8px;
+    margin-top: 10px;
+    padding-top: 10px;
+    font-weight: bold;
+    color: #4da6ff;
+    background-color: rgba(60, 60, 60, 0.5);
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 5px 0 5px;
+}
+
+QFrame {
+    border: 1px solid #444;
+    border-radius: 5px;
+    background-color: rgba(60, 60, 60, 0.3);
+}
+
+/* ===== STACKED WIDGET ===== */
+QStackedWidget {
+    background-color: #2b2b2b;
+    border: none;
+}
+
+/* ===== SCROLLBARS ===== */
+QScrollBar:vertical {
+    background: #3c3c3c;
+    width: 12px;
+    border-radius: 6px;
+}
+
+QScrollBar::handle:vertical {
+    background: #666;
+    border-radius: 6px;
+    min-height: 20px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #888;
+}
+
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+    height: 0px;
+}
+
+/* ===== TEXT AREA VOOR ACTIONS ===== */
+QLabel[objectName*="actions"] {
+    background-color: #1e1e1e;
+    border: 2px solid #444;
+    border-radius: 5px;
+    padding: 10px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    color: #00ccff;
+    min-height: 80px;
+}
+
+/* ===== STATS DISPLAY ===== */
+/* Voor ChoiceScreen stats */
+QLabel[objectName*="lbl_Hp_Value"] { color: #ff6666; font-weight: bold; }
+QLabel[objectName*="lbl_Dmg_Value"] { color: #ff9933; font-weight: bold; }
+QLabel[objectName*="lbl_Armor_Value"] { color: #4da6ff; font-weight: bold; }
+QLabel[objectName*="lblSpeed_Value"] { color: #9966ff; font-weight: bold; }
+QLabel[objectName*="lbl_Level_Value"] { color: #ffcc00; font-weight: bold; }
+QLabel[objectName*="lbl_Exp_Value"] { color: #00cc66; font-weight: bold; }
+QLabel[objectName*="lbl_StageValue"] { color: #ff66cc; font-weight: bold; }
+
+/* ===== IMAGE LABELS ===== */
+QLabel[objectName*="Image"] {
+    border: 3px solid #555;
+    border-radius: 10px;
+    background-color: #1e1e1e;
+}
+
+/* ===== ROUND LABEL ===== */
+QLabel[objectName*="Round"] {
+    color: #ffcc00;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* ===== SPECIFIEKE SCREENS ===== */
+/* StartScreen */
+QWidget[objectName="StartScreen"] {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                      stop:0 #1a1a2e, stop:1 #16213e);
+}
+
+/* ChoiceScreen */
+QWidget[objectName="ChoiceScreen"] {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                      stop:0 #2b2b2b, stop:1 #1e1e1e);
+}
+
+/* BattleScreen */
+QWidget[objectName="BattleScreen"] {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                      stop:0 #1a1a1a, stop:1 #2a1a2a);
+}
+
+/* PartyScreen */
+QWidget[objectName="PartyScreen"] {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                      stop:0 #1e2a1e, stop:1 #1a1a2a);
+}
+
+/* StoreScreen */
+QWidget[objectName="StoreScreen"] {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                                      stop:0 #2a1a1a, stop:1 #1a1a2a);
+}

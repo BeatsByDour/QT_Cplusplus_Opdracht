@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>PartyScreen</class>
- <widget class="QWidget" name="PartyScreen">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>750</width>
-    <height>550</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="palette">
@@ -479,49 +479,83 @@
     </disabled>
    </palette>
   </property>
-  <property name="font">
-   <font>
-    <pointsize>12</pointsize>
-   </font>
-  </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>RogueLikeTowerFighter</string>
   </property>
-  <widget class="QPushButton" name="btnReturn">
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QStackedWidget" name="ScreenStack">
+    <property name="geometry">
+     <rect>
+      <x>-1</x>
+      <y>9</y>
+      <width>801</width>
+      <height>571</height>
+     </rect>
+    </property>
+    <property name="palette">
+     <palette>
+      <active/>
+      <inactive/>
+      <disabled/>
+     </palette>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="StartScreen" name="StartScreen"/>
+    <widget class="BattleScreen" name="BattleScreen"/>
+    <widget class="PartyScreen" name="PartyScreen"/>
+    <widget class="StoreScreen" name="StoreScreen"/>
+    <widget class="ChoiceScreen" name="ChoiceScreen"/>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
-     <x>600</x>
-     <y>500</y>
-     <width>131</width>
-     <height>31</height>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>21</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Return</string>
-   </property>
   </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>220</x>
-     <y>30</y>
-     <width>321</width>
-     <height>71</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>27</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Party</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignmentFlag::AlignCenter</set>
-   </property>
-  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ChoiceScreen</class>
+   <extends>QWidget</extends>
+   <header>choicescreen.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PartyScreen</class>
+   <extends>QWidget</extends>
+   <header>partyscreen.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>StoreScreen</class>
+   <extends>QWidget</extends>
+   <header>storescreen.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>BattleScreen</class>
+   <extends>QWidget</extends>
+   <header>battlescreen.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>StartScreen</class>
+   <extends>QWidget</extends>
+   <header>startscreen.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

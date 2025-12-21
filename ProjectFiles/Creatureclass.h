@@ -6,7 +6,6 @@
 #include "CharacterClass.h"
 #include "Move.h"
 #include <array>
-
 class CreatureClass : public CharacterClass
 {
 private:
@@ -16,8 +15,11 @@ private:
     std::array<Move, 4> aMoves{};
 
 public:
-
+    //copy constructor
+    CreatureClass(const CreatureClass& other) = default;
+    //default constructor
     CreatureClass();
+    // CharacterClass.h - parameterized constructor
     CreatureClass(const std::string& name,
                   int maxHp,
                   int pDamage,

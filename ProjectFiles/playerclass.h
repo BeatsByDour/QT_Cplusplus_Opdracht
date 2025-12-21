@@ -13,7 +13,7 @@
 class PlayerClass : public CharacterClass
 {
 private:
-    std::array<Move, 2> m_playerMoves;           // 2 moves van de speler zelf
+    std::array<Move, 2> m_playerMoves;           // 2 moves van de speler zelf container class
     std::array<CreatureClass, 4> m_caughtBeasts; // party van 4
     int m_activeBeastIndex{0};                   // welke beast is actief?
 
@@ -31,15 +31,21 @@ private:
 
 
 public:
-    PlayerClass(const std::string& name,
+    // parameter constructor
+    PlayerClass(const std::string& name, // modern call by ref
                 int maxHP,
                 int pDamage,
                 int mDamage,
                 int pArmor,
                 int mArmor,
                 int speed,
-                const std::array<Move, 2>& playerMoves,
+                const std::array<Move, 2>& playerMoves, // const reff var
                 QString playerImage);
+
+    // default constructor
+    PlayerClass() : CharacterClass("Player", 50, 10, 10, 5, 5, 15, ""),
+        m_playerMoves{}, m_caughtBeasts{}, m_activeBeastIndex(0),
+        m_weapon{}, m_armor{}, m_materials{} {}
     // Interface uit CharacterClass
     void PrintName() const override;
 
@@ -52,6 +58,7 @@ public:
     void SwitchBeast(int index);
 
     // Player moves
+    // const ref func
     const Move& GetPlayerMove(int index) const { return m_playerMoves.at(index); }
 
     // Battle actions
@@ -65,6 +72,7 @@ public:
     void SetMoves(const std::array<Move, 2>& moves) { m_playerMoves = moves; }
     void SetParty(const std::array<CreatureClass, 4>& party) { m_caughtBeasts = party; }
     bool AddToParty(const CreatureClass& beast);
+    // const ref func
     QString GetStatsString()const;
 
 

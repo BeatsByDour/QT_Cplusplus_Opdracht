@@ -18,7 +18,7 @@ TotalMovesClass::TotalMovesClass()
 
 }
 
-
+// const ref voor functie
 std::optional<Move> TotalMovesClass::GetMoveById(int id) const
 {
     for (const auto& m : m_moves)
@@ -28,7 +28,7 @@ std::optional<Move> TotalMovesClass::GetMoveById(int id) const
     }
     return std::nullopt;
 }
-
+//const ref voor functie
 std::optional<Move> TotalMovesClass::GetMoveByName(const std::string& name) const
 {
     for (const auto& m : m_moves)

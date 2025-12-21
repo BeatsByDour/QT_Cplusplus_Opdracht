@@ -36,7 +36,7 @@ void CreatureClass::PrintMoves() const
                   << ", Acc: " << m.accuracy << ")\n";
     }
 }
-// Creatureclass.cpp
+// Creatureclass.cpp - regel 30-50
 CreatureClass::CreatureClass()
     : CharacterClass("Empty", 1, 0, 0, 0, 0, 10," "),
     iId(-1),
@@ -44,7 +44,7 @@ CreatureClass::CreatureClass()
     aTypes{Type::Earth, Type::Earth},
     aMoves{}
 {
-    // lege creature: geen sterke stats
+
     bGoodHP      = false;
     bGoodPDamage = false;
     bGoodMDamage = false;
